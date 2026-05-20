@@ -97,6 +97,7 @@ PROJECT_PATTERNS = [
     re.compile(r"(?:商品名称|商品标题)\s*[:：]\s*(.+)"),
 ]
 PHONE_RE = re.compile(r"\b1[3-9]\d{9}\b")
+ORDER_ID_RE = re.compile(r"\b\d{10,30}\b")
 BUYER_RE = re.compile(r"(?:淘宝旺旺|买家|旺旺)\s*[:：]\s*([^\s\r\n]+)")
 PENDING_STATUS_WORDS = ("待发货",)
 ORDER_STATUS_WORDS = ("待发货", "待付款", "未付款", "已付款", "已完成", "已关闭", "交易关闭", "退款", "售后")
@@ -686,6 +687,55 @@ def pick_phone(text):
     return match.group(0) if match else ""
 
 
+def pick_phone_field(text):
+    labeled = pick_labeled_field(text, "phone")
+    return pick_phone(labeled) or pick_phone(text) or labeled
+
+
+def clean_chat_value(value):
+    return str(value or "").strip(" \t\r\n:：,，;；。")
+
+
+def looks_like_role_candidate(value):
+    value = clean_chat_value(value)
+    if not value:
+        return False
+    if PHONE_RE.search(value) or ORDER_ID_RE.search(value):
+        return False
+    if re.fullmatch(r"[0-9.\-_/]+", value):
+        return False
+    if len(value) > 30:
+        return False
+
+    excluded_keywords = (
+        "订单", "价格", "接单", "付款", "旺旺", "淘宝", "买家",
+        "电话", "手机", "联系", "账号", "密码", "区服", "系统",
+        "保险", "项目", "购买", "商品", "代练",
+    )
+    if any(keyword in value for keyword in excluded_keywords):
+        return False
+
+    return bool(re.search(r"[\u4e00-\u9fffA-Za-z]", value))
+
+
+def pick_unlabeled_role(text):
+    text = normalize_text(text)
+    text = PHONE_RE.sub(" ", text)
+
+    parts = []
+    for line in text.splitlines():
+        line = clean_chat_value(line)
+        if not line:
+            continue
+        parts.append(line)
+        parts.extend(clean_chat_value(part) for part in re.split(r"[\s,，;；|]+", line))
+
+    for part in parts:
+        if looks_like_role_candidate(part):
+            return clean_chat_value(part)
+    return ""
+
+
 def pick_buyer(text):
     match = BUYER_RE.search(text)
     if match:
@@ -736,7 +786,7 @@ def get_relevant_order_blocks(text):
 def pick_labeled_field(text, field_name):
     labels = FIELD_LABELS[field_name]
     label_pattern = "|".join(re.escape(label) for label in labels)
-    pattern = re.compile(rf"(?:{label_pattern})\s*[:：]\s*([^\r\n]+)")
+    pattern = re.compile(rf"(?:{label_pattern})\s*(?:[:：]|\s+)\s*([^\r\n,，;；]+)")
     match = pattern.search(text)
     return match.group(1).strip() if match else ""
 
@@ -744,7 +794,7 @@ def pick_labeled_field(text, field_name):
 def pick_labeled_fields(text, field_name):
     labels = FIELD_LABELS[field_name]
     label_pattern = "|".join(re.escape(label) for label in labels)
-    pattern = re.compile(rf"(?:{label_pattern})\s*[:：]\s*([^\r\n]+)")
+    pattern = re.compile(rf"(?:{label_pattern})\s*(?:[:：]|\s+)\s*([^\r\n,，;；]+)")
     return [match.strip() for match in pattern.findall(text) if match.strip()]
 
 
@@ -804,7 +854,7 @@ def parse_order_text(text):
         "project": "",
         "system": pick_labeled_field(text, "system"),
         "role": pick_labeled_field(text, "role"),
-        "phone": pick_labeled_field(text, "phone") or pick_phone(text),
+        "phone": pick_phone_field(text),
         "account": pick_labeled_field(text, "account"),
         "password": pick_labeled_field(text, "password"),
         "server": pick_labeled_field(text, "server"),
@@ -816,8 +866,21 @@ def merge_info(primary, fallback):
     return {key: primary.get(key) or fallback.get(key, "") for key in set(primary) | set(fallback)}
 
 
+def parse_chat_input_text(text):
+    text = normalize_text(text)
+    return {
+        "system": pick_labeled_field(text, "system"),
+        "role": pick_labeled_field(text, "role") or pick_unlabeled_role(text),
+        "phone": pick_phone_field(text),
+        "account": pick_labeled_field(text, "account"),
+        "password": pick_labeled_field(text, "password"),
+        "server": pick_labeled_field(text, "server"),
+        "insurance": pick_labeled_field(text, "insurance"),
+    }
+
+
 def merge_order_info_with_chat_input(order_info, chat_input_text):
-    chat_info = parse_order_text(chat_input_text) if chat_input_text.strip() else {}
+    chat_info = parse_chat_input_text(chat_input_text) if chat_input_text.strip() else {}
     merged = merge_info(order_info, chat_info)
     # Order number and price must always come from the current right-side order data.
     for key in ("order_id", "price", "buyer", "project"):
