@@ -12,6 +12,9 @@ try:
 except ImportError:
     pyautogui = None
 
+if pyautogui is not None:
+    pyautogui.PAUSE = 0.02
+
 try:
     import uiautomation as auto
 except ImportError:
@@ -26,6 +29,7 @@ except ImportError:
 CONFIG_PATH = Path("qianniu_config.json")
 BASKET_PATH = Path("qianniu_order_basket.json")
 PENDING_REMARK_TEXT = ""
+USE_CONFIG_FILE = False
 
 DEFAULT_CONFIG = {
     "quick_copy_button": None,
@@ -48,6 +52,7 @@ DEFAULT_RELATIVE_POINTS = {
     # These are used only when no manual coordinate is configured.
     "quick_copy_button": {"x": 0.72, "y": 0.89},
     "quick_copy_save_button": {"x": 0.74, "y": 0.90},
+    "buyer_copy_button": {"x": 0.80, "y": 0.33},
     "right_orders_panel": {"x": 0.83, "y": 0.55},
     "chat_input": {"x": 0.42, "y": 0.86},
     "remark_button": {"x": 0.895, "y": 0.885},
@@ -118,6 +123,9 @@ FIELD_LABELS = {
 
 
 def load_config():
+    if not USE_CONFIG_FILE:
+        return dict(DEFAULT_CONFIG)
+
     if not CONFIG_PATH.exists():
         save_config(DEFAULT_CONFIG)
         return dict(DEFAULT_CONFIG)
@@ -133,6 +141,9 @@ def load_config():
 
 
 def save_config(config):
+    if not USE_CONFIG_FILE:
+        return
+
     with CONFIG_PATH.open("w", encoding="utf-8") as f:
         json.dump(config, f, ensure_ascii=False, indent=2)
 
@@ -245,33 +256,144 @@ def paste_text_strict(text):
     keyboard.press_and_release("ctrl+v")
 
 
-def paste_to_chat_input(text):
-    pyperclip.copy(text)
-    time.sleep(0.1)
+def release_keyboard_modifiers():
+    if pyautogui is None:
+        return
 
-    config = load_config()
-    point = config.get("chat_input")
-    if point and pyautogui is not None:
-        pyautogui.click(point["x"], point["y"])
-        time.sleep(0.15)
-        keyboard.press_and_release("ctrl+v")
-        return True
+    for key in ("ctrl", "shift", "alt"):
+        try:
+            pyautogui.keyUp(key)
+        except Exception:
+            pass
 
-    window_rect = get_qianniu_window_rect()
-    if pyautogui is None or not window_rect:
-        print("模板已复制到剪贴板，但没有找到千牛窗口，无法自动粘贴。")
+
+def press_hotkey(*keys):
+    release_keyboard_modifiers()
+    if pyautogui is not None:
+        pyautogui.hotkey(*keys)
+    else:
+        keyboard.press_and_release("+".join(keys))
+
+
+def wait_for_clipboard_change(marker, timeout=0.35, interval=0.03):
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        copied_text = pyperclip.paste()
+        if copied_text != marker:
+            return copied_text
+        time.sleep(interval)
+    return pyperclip.paste()
+
+
+def point_inside_rect(point, rect, margin=0):
+    return (
+        rect["left"] - margin <= point["x"] <= rect["right"] + margin
+        and rect["top"] - margin <= point["y"] <= rect["bottom"] + margin
+    )
+
+
+def focus_qianniu_window_by_pywinauto():
+    if Desktop is None:
         return False
+
+    try:
+        windows = Desktop(backend="uia").windows()
+    except Exception:
+        return False
+
+    for window in windows:
+        try:
+            name = str(window.window_text() or "")
+        except Exception:
+            name = ""
+
+        if any(excluded in name for excluded in EXCLUDED_WINDOW_KEYWORDS):
+            continue
+        if not any(keyword_name in name for keyword_name in QIANNIU_WINDOW_KEYWORDS):
+            continue
+
+        try:
+            window.set_focus()
+            time.sleep(0.15)
+            return True
+        except Exception:
+            continue
+
+    return False
+
+
+def focus_chat_input_by_hotkey():
+    focused = focus_qianniu_window_by_pywinauto()
+    press_hotkey("ctrl", "i")
+    time.sleep(0.12)
+    return focused
+
+
+def get_chat_input_click_points(include_relative=True):
+    config_point = load_config().get("chat_input")
+    yielded = []
+    window_rect = get_qianniu_window_rect()
+
+    if config_point:
+        if not window_rect or point_inside_rect(config_point, window_rect, margin=2):
+            yielded.append((config_point["x"], config_point["y"]))
+            yield config_point
+        else:
+            print("chat_input 配置坐标不在当前千牛窗口内，已改用窗口相对位置。")
+
+    if not window_rect:
+        return
+
+    if not include_relative:
+        return
 
     for relative_point in CHAT_INPUT_FALLBACK_POINTS:
         x = int(window_rect["left"] + window_rect["width"] * relative_point["x"])
         y = int(window_rect["top"] + window_rect["height"] * relative_point["y"])
-        pyautogui.click(x, y)
-        time.sleep(0.12)
-        keyboard.press_and_release("ctrl+v")
-        time.sleep(0.12)
-        return True
+        if any(abs(x - old_x) <= 3 and abs(y - old_y) <= 3 for old_x, old_y in yielded):
+            continue
+        yielded.append((x, y))
+        yield {"x": x, "y": y}
 
+
+def paste_text_to_focused_input(text):
+    pyperclip.copy(text)
+    time.sleep(0.06)
+    press_hotkey("ctrl", "a")
+    time.sleep(0.03)
+    press_hotkey("ctrl", "v")
+    time.sleep(0.12)
+    pyperclip.copy(text)
+
+
+def paste_at_chat_input_point(point, text):
+    focus_chat_input_by_hotkey()
+    paste_text_to_focused_input(text)
+    return True
+
+def paste_to_chat_input_by_click(text):
+    for point in get_chat_input_click_points(include_relative=False):
+        focus_qianniu_window_by_pywinauto()
+        pyautogui.click(point["x"], point["y"])
+        time.sleep(0.08)
+        paste_text_to_focused_input(text)
+        return True
     return False
+
+
+def paste_to_chat_input_by_hotkey(text):
+    focus_chat_input_by_hotkey()
+    paste_text_to_focused_input(text)
+    return True
+
+
+def paste_to_chat_input(text):
+    if pyautogui is None:
+        pyperclip.copy(text)
+        print("模板已复制到剪贴板，但没有找到千牛窗口，无法自动粘贴。")
+        return False
+
+    return paste_to_chat_input_by_hotkey(text)
 
 
 def normalize_text(text):
@@ -694,6 +816,16 @@ def merge_info(primary, fallback):
     return {key: primary.get(key) or fallback.get(key, "") for key in set(primary) | set(fallback)}
 
 
+def merge_order_info_with_chat_input(order_info, chat_input_text):
+    chat_info = parse_order_text(chat_input_text) if chat_input_text.strip() else {}
+    merged = merge_info(order_info, chat_info)
+    # Order number and price must always come from the current right-side order data.
+    for key in ("order_id", "price", "buyer", "project"):
+        if order_info.get(key):
+            merged[key] = order_info[key]
+    return merged
+
+
 def build_order_template(info):
     return f"""订单编号:{info["order_id"]}
 淘宝旺旺:{info.get("buyer", "")}
@@ -827,6 +959,8 @@ def copy_visible_quick_copy_orders_info():
             button for button in find_quick_copy_button_candidates()
             if not is_button_already_seen(button, seen_button_centers)
         ]
+        if scan_index > 0:
+            buttons.sort(key=lambda item: (item["center_y"], item["center_x"]), reverse=True)
 
         if not buttons:
             print(f"{scan_name}没有找到新的快捷复制按钮。")
@@ -861,6 +995,7 @@ def copy_visible_quick_copy_orders_info():
 
             price = float(info["price"])
             price_each = price / len(order_ids)
+            new_order_added = False
             for order_id in order_ids:
                 if order_id in order_items:
                     print(f"订单 {order_id} 已复制过，跳过重复计入。")
@@ -869,6 +1004,14 @@ def copy_visible_quick_copy_orders_info():
                     "order_id": order_id,
                     "price": price_each,
                 }
+                new_order_added = True
+
+            if scan_index > 0 and expected_count and len(order_items) < expected_count:
+                if new_order_added:
+                    print("本次下滑已拿到新订单，继续下滑找下一笔，避免反复点同屏旧订单。")
+                else:
+                    print("本次点到的是已有订单，直接继续下滑找新订单。")
+                break
 
         if expected_count and len(order_items) >= expected_count:
             break
@@ -961,26 +1104,40 @@ def get_pywinauto_right_side_text():
 def copy_order_text_from_quick_copy_button(button, index=None):
     marker = f"__QIANNIU_ORDER_COPY_MARKER_{uuid.uuid4()}__"
     pyperclip.copy(marker)
-    time.sleep(0.05)
+    time.sleep(0.01)
 
     control = button["control"]
-    try:
-        control.click_input()
-    except Exception:
-        try:
-            control.click()
-        except Exception as exc:
-            print(f"pywinauto 点击快捷复制失败: {exc}")
+    copied_text = invoke_quick_copy_control_by_pywinauto(control, marker)
+    if copied_text == marker:
+        print("pywinauto invoke 快捷复制未生效，改用坐标点击兜底。")
+        if pyautogui is None:
             return ""
+        pyautogui.click(button["center_x"], button["center_y"])
+        copied_text = wait_for_clipboard_change(marker, timeout=0.28, interval=0.02)
 
-    time.sleep(0.45)
-    copied_text = pyperclip.paste()
     copied_text = "" if copied_text == marker else normalize_text(copied_text)
     if copied_text:
         order_id = parse_order_text(copied_text).get("order_id") or "未识别订单号"
         prefix = f"第 {index} 个" if index is not None else ""
-        print(f"{prefix}已通过 pywinauto 点击快捷复制: ({button['center_x']}, {button['center_y']}), {order_id}。")
+        print(f"{prefix}已点击快捷复制: ({button['center_x']}, {button['center_y']}), {order_id}。")
     return copied_text
+
+
+def invoke_quick_copy_control_by_pywinauto(control, marker):
+    for action in (
+        lambda: control.invoke(),
+        lambda: control.iface_invoke.Invoke(),
+    ):
+        try:
+            action()
+        except Exception:
+            continue
+
+        copied_text = wait_for_clipboard_change(marker, timeout=0.18, interval=0.02)
+        if copied_text != marker:
+            return copied_text
+
+    return marker
 
 
 def find_quick_copy_button_candidates():
@@ -1055,14 +1212,14 @@ def scroll_right_orders_panel_down():
         scroll_x, scroll_y = point["x"], point["y"]
 
     pyautogui.moveTo(scroll_x, scroll_y)
-    time.sleep(0.1)
+    time.sleep(0.04)
     pyautogui.click(scroll_x, scroll_y)
-    time.sleep(0.1)
+    time.sleep(0.04)
     # 多次大幅滚动，确保翻过至少一个订单卡
-    for _ in range(5):
-        pyautogui.scroll(-60)
-        time.sleep(0.08)
-    time.sleep(0.5)
+    for _ in range(4):
+        pyautogui.scroll(-80)
+        time.sleep(0.03)
+    time.sleep(0.25)
 
 
 def click_quick_copy_button():
@@ -1155,7 +1312,9 @@ def copy_teammate_message_text():
 
 
 def generate_template():
+    chat_input_text = copy_chat_input_text()
     info = get_order_info()
+    info = merge_order_info_with_chat_input(info, chat_input_text)
 
     missing = [name for name in ("order_id", "price") if not info.get(name)]
     if missing:
@@ -1293,27 +1452,15 @@ def reset_right_panel_to_top():
 
 
 def copy_chat_input_text():
-    point = load_config().get("chat_input")
-    if pyautogui is not None and point:
-        pyautogui.click(point["x"], point["y"])
-        time.sleep(0.15)
-    else:
-        window_rect = get_qianniu_window_rect()
-        if pyautogui is not None and window_rect:
-            relative_point = CHAT_INPUT_FALLBACK_POINTS[0]
-            x = int(window_rect["left"] + window_rect["width"] * relative_point["x"])
-            y = int(window_rect["top"] + window_rect["height"] * relative_point["y"])
-            pyautogui.click(x, y)
-            time.sleep(0.15)
+    focus_chat_input_by_hotkey()
 
     marker = f"__QIANNIU_CHAT_INPUT_MARKER_{uuid.uuid4()}__"
     pyperclip.copy(marker)
-    time.sleep(0.05)
-    keyboard.press_and_release("ctrl+a")
-    time.sleep(0.05)
-    keyboard.press_and_release("ctrl+c")
-    time.sleep(0.15)
-    copied = pyperclip.paste()
+    time.sleep(0.02)
+    press_hotkey("ctrl", "a")
+    time.sleep(0.03)
+    press_hotkey("ctrl", "c")
+    copied = wait_for_clipboard_change(marker, timeout=0.18, interval=0.03)
     copied = "" if copied == marker else normalize_text(copied)
 
     with Path("qianniu_last_chat_input_text.txt").open("w", encoding="utf-8") as f:
@@ -1457,6 +1604,11 @@ def save_visible_text_for_debug():
 
 
 def calibrate_points():
+    if not USE_CONFIG_FILE:
+        print("坐标配置文件已停用，当前脚本使用快捷键、pywinauto 和窗口相对位置。")
+        print("如需重新启用 qianniu_config.json，请把 USE_CONFIG_FILE 改为 True。")
+        return
+
     if pyautogui is None:
         print("未安装 pyautogui，无法校准坐标。")
         return
