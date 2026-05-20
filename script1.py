@@ -378,7 +378,7 @@ def run_remark_task(page):
                         else:
                             if ele.child(2).child(1).text == ('板蓝根'):
                                 ele.click(by_js=True)
-                    bre
+                    break
         else:
             print (f'order_ids.txt没有{order_id},阻止运行ctrl+3')
             show_toast(page, "必须要先进行写入订单才能执行备注转接\n请按下ctrl+2执行备注转接", level='error', duration=3000)
