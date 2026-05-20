@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-05-20 09:31:07",
+  "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.seller.tobuy/1.0/?jsv=2.6.1&appKey=12574478&t=1779240662807&sign=3e4871b6adce69ef491eda2d1461f7e1&api=mtop.taobao.trade.seller.tobuy&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp20&data=%7B%22params%22%3A%22%7B%5C%22operation%5C%22%3A%5C%22renderMini%5C%22%7D%22%7D",
+  "method": "GET",
+  "request": {
+    "params": {
+      "jsv": "2.6.1",
+      "appKey": "12574478",
+      "t": "1779240662807",
+      "sign": "3e4871b6adce69ef491eda2d1461f7e1",
+      "api": "mtop.taobao.trade.seller.tobuy",
+      "v": "1.0",
+      "ttid": "11320@taobao_WEB_9.9.99",
+      "dataType": "originaljsonp",
+      "type": "originaljsonp",
+      "callback": "mtopjsonp20",
+      "data": "{\"params\":\"{\\\"operation\\\":\\\"renderMini\\\"}\"}"
+    },
+    "postData": false
+  },
+  "response": {
+    "text": " mtopjsonp20({\"api\":\"mtop.taobao.trade.seller.tobuy\",\"data\":{\"increaseCount\":\"0\",\"linkUrl\":\"https://qn.taobao.com/home.htm/trade-platform/operation-center\",\"missCount\":\"1\",\"newIncreaseCount\":{\"help\":\"昨日（同层商家顺手买一件新客人数、订单复购人数、按月订购购买人数总和）- （你的店铺顺手买一件新客人数、订单复购人数、按月订购购买人数总和）。数据每天14:00更新\",\"title\":\"预计每天新增成交\",\"value\":\"0\"},\"text\":\"您可能错过了1个用户的成交机会，进行交易运营后，预计每天新增0个用户成交。\",\"updateHint\":\"数据每天14:00更新\",\"viewItemList\":[{\"help\":\"昨日浏览过顺手买一件和订单列表，但是未成交的用户数量\",\"title\":\"可能错过用户\",\"value\":\"1\"},{\"help\":\"昨日（同层商家顺手买一件新客人数、订单复购人数、按月订购购买人数总和）- （你的店铺顺手买一件新客人数、订单复购人数、按月订购购买人数总和）\",\"title\":\"每天新增成交\",\"value\":\"0\"}]},\"ret\":[\"SUCCESS::调用成功\"],\"v\":\"1.0\"})"
+  },
+  "records": []
+}

@@ -1,0 +1,35 @@
+{
+  "captured_at": "2026-05-20 09:31:07",
+  "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.order.nums.pc/1.0/?jsv=2.6.1&appKey=12574478&t=1779240662807&sign=8bf14e0370dc60a0f66fa9a71d64272d&api=mtop.taobao.trade.order.nums.pc&v=1.0&ttid=11320%40taobao_WEB_9.9.99&type=originaljson&dataType=json",
+  "method": "POST",
+  "request": {
+    "params": {
+      "jsv": "2.6.1",
+      "appKey": "12574478",
+      "t": "1779240662807",
+      "sign": "8bf14e0370dc60a0f66fa9a71d64272d",
+      "api": "mtop.taobao.trade.order.nums.pc",
+      "v": "1.0",
+      "ttid": "11320@taobao_WEB_9.9.99",
+      "type": "originaljson",
+      "dataType": "json"
+    },
+    "postData": "data=%7B%22sourceApp%22%3A%22qianniuTrademanager%22%2C%22sellerCountEnum%22%3A%22%5B%5C%22wait_consign%5C%22%2C%5C%22consign_to_timeout%5C%22%2C%5C%22consign_already_timeout%5C%22%5D%22%7D"
+  },
+  "response": {
+    "api": "mtop.taobao.trade.order.nums.pc",
+    "data": {
+      "countMap": {
+        "wait_consign": 3,
+        "consign_already_timeout": 0,
+        "consign_to_timeout": 0
+      }
+    },
+    "ret": [
+      "SUCCESS::调用成功"
+    ],
+    "traceId": "2147849d17792406641603669e1350",
+    "v": "1.0"
+  },
+  "records": []
+}

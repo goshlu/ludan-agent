@@ -1,0 +1,9 @@
+.venv/
+.python312/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+cookies.txt
+*.txt
+!Agents.md

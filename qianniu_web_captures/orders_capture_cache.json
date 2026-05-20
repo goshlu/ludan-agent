@@ -1,0 +1,79 @@
+[
+  {
+    "captured_at": "2026-05-19 17:29:06",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.worklink.task.query.new/1.0/?jsv=2.6.1&appKey=12574478&t=1779182939798&sign=e18ab34704a93639fc05d128134e4b65&api=mtop.taobao.worklink.task.query.new&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp44&data=%7B%22bizCode%22%3A%22all%22%2C%22orderByCreateDate%22%3Atrue%2C%22desc%22%3Atrue%2C%22primaryStatusCode%22%3A%22wait_handle%22%2C%22isAssigned%22%3Atrue%2C%22pageIndex%22%3A1%2C%22pageSize%22%3A3%7D",
+    "method": "GET",
+    "records_count": 0,
+    "raw_path": "qianniu_web_captures\\raw\\1779182946946_https_h5api.m.taobao.com_h5_mtop.taobao.worklink.task.query.new_1.0_jsv_2.6.1_appKey_12574478_t_1779182939798_sign_e18ab34704a93639fc05d128134e4b65_ap.json"
+  },
+  {
+    "captured_at": "2026-05-19 17:29:07",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.multi.resource.plugin.miniapp.my.all.no.encryption/1.0/?jsv=2.6.1&appKey=12574478&t=1779182939684&sign=48503e74a7018805627846e1d18d01da&api=mtop.taobao.multi.resource.plugin.miniapp.my.all.no.encryption&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp37&data=%7B%7D",
+    "method": "GET",
+    "records_count": 1,
+    "raw_path": "qianniu_web_captures\\raw\\1779182947197_https_h5api.m.taobao.com_h5_mtop.taobao.multi.resource.plugin.miniapp.my.all.no.encryption_1.0_jsv_2.6.1_appKey_12574478_t_1779182939684_sign_48503e74.json"
+  },
+  {
+    "captured_at": "2026-05-19 17:32:42",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.seller.tobuy/1.0/?jsv=2.6.1&appKey=12574478&t=1779183160137&sign=d5237390894134d3732b7738330dce69&api=mtop.taobao.trade.seller.tobuy&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp45&data=%7B%22params%22%3A%22%7B%5C%22operation%5C%22%3A%5C%22renderMini%5C%22%7D%22%7D",
+    "method": "GET",
+    "records_count": 0,
+    "raw_path": "qianniu_web_captures\\raw\\1779183162820_https_h5api.m.taobao.com_h5_mtop.taobao.trade.seller.tobuy_1.0_jsv_2.6.1_appKey_12574478_t_1779183160137_sign_d5237390894134d3732b7738330dce69_api_mto.json"
+  },
+  {
+    "captured_at": "2026-05-19 17:32:42",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.order.xsd/1.0/?jsv=2.6.1&appKey=12574478&t=1779183160137&sign=d986c4bafb244e4253b55bd4a5b06d6d&api=mtop.taobao.trade.order.xsd&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp46&data=%7B%7D",
+    "method": "GET",
+    "records_count": 0,
+    "raw_path": "qianniu_web_captures\\raw\\1779183162853_https_h5api.m.taobao.com_h5_mtop.taobao.trade.order.xsd_1.0_jsv_2.6.1_appKey_12574478_t_1779183160137_sign_d986c4bafb244e4253b55bd4a5b06d6d_api_mtop.t.json"
+  },
+  {
+    "captured_at": "2026-05-19 17:32:43",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.order.nums.pc/1.0/?jsv=2.6.1&appKey=12574478&t=1779183160137&sign=127bdab7a64e18a702b878fb9648dd00&api=mtop.taobao.trade.order.nums.pc&v=1.0&ttid=11320%40taobao_WEB_9.9.99&type=originaljson&dataType=json",
+    "method": "POST",
+    "records_count": 0,
+    "raw_path": "qianniu_web_captures\\raw\\1779183163287_https_h5api.m.taobao.com_h5_mtop.taobao.trade.order.nums.pc_1.0_jsv_2.6.1_appKey_12574478_t_1779183160137_sign_127bdab7a64e18a702b878fb9648dd00_api_mt.json"
+  },
+  {
+    "captured_at": "2026-05-19 17:32:43",
+    "url": "https://trade.taobao.com/trade/itemlist/asyncSold.htm?event_submit_do_query=1&_input_charset=utf8",
+    "method": "POST",
+    "records_count": 19,
+    "raw_path": "qianniu_web_captures\\raw\\1779183163475_https_trade.taobao.com_trade_itemlist_asyncSold.htm_event_submit_do_query_1__input_charset_utf8.json"
+  },
+  {
+    "captured_at": "2026-05-20 09:31:05",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.jdy.resource.shop.info.get/1.0/?jsv=2.6.1&appKey=12574478&t=1779240661909&sign=0c39a918f82b59ff33e43d2dbbb27b06&ttid=11320%40taobao_WEB_9.9.99&v=1.0&type=originaljsonp&timeout=20000&dataType=originaljsonp&api=mtop.taobao.jdy.resource.shop.info.get&callback=mtopjsonp3&data=%7B%7D",
+    "method": "GET",
+    "records_count": 1,
+    "raw_path": "qianniu_web_captures\\raw\\1779240665876_https_h5api.m.taobao.com_h5_mtop.taobao.jdy.resource.shop.info.get_1.0_jsv_2.6.1_appKey_12574478_t_1779240661909_sign_0c39a918f82b59ff33e43d2dbbb27b06.json"
+  },
+  {
+    "captured_at": "2026-05-20 09:31:07",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.order.xsd/1.0/?jsv=2.6.1&appKey=12574478&t=1779240662807&sign=f3dd98aeee398da088e31af672fd2ebe&api=mtop.taobao.trade.order.xsd&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp21&data=%7B%7D",
+    "method": "GET",
+    "records_count": 0,
+    "raw_path": "qianniu_web_captures\\raw\\1779240667115_https_h5api.m.taobao.com_h5_mtop.taobao.trade.order.xsd_1.0_jsv_2.6.1_appKey_12574478_t_1779240662807_sign_f3dd98aeee398da088e31af672fd2ebe_api_mtop.t.json"
+  },
+  {
+    "captured_at": "2026-05-20 09:31:07",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.order.nums.pc/1.0/?jsv=2.6.1&appKey=12574478&t=1779240662807&sign=8bf14e0370dc60a0f66fa9a71d64272d&api=mtop.taobao.trade.order.nums.pc&v=1.0&ttid=11320%40taobao_WEB_9.9.99&type=originaljson&dataType=json",
+    "method": "POST",
+    "records_count": 0,
+    "raw_path": "qianniu_web_captures\\raw\\1779240667210_https_h5api.m.taobao.com_h5_mtop.taobao.trade.order.nums.pc_1.0_jsv_2.6.1_appKey_12574478_t_1779240662807_sign_8bf14e0370dc60a0f66fa9a71d64272d_api_mt.json"
+  },
+  {
+    "captured_at": "2026-05-20 09:31:07",
+    "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.seller.tobuy/1.0/?jsv=2.6.1&appKey=12574478&t=1779240662807&sign=3e4871b6adce69ef491eda2d1461f7e1&api=mtop.taobao.trade.seller.tobuy&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp20&data=%7B%22params%22%3A%22%7B%5C%22operation%5C%22%3A%5C%22renderMini%5C%22%7D%22%7D",
+    "method": "GET",
+    "records_count": 0,
+    "raw_path": "qianniu_web_captures\\raw\\1779240667273_https_h5api.m.taobao.com_h5_mtop.taobao.trade.seller.tobuy_1.0_jsv_2.6.1_appKey_12574478_t_1779240662807_sign_3e4871b6adce69ef491eda2d1461f7e1_api_mto.json"
+  },
+  {
+    "captured_at": "2026-05-20 09:31:08",
+    "url": "https://trade.taobao.com/trade/itemlist/asyncSold.htm?event_submit_do_query=1&_input_charset=utf8",
+    "method": "POST",
+    "records_count": 28,
+    "raw_path": "qianniu_web_captures\\raw\\1779240668051_https_trade.taobao.com_trade_itemlist_asyncSold.htm_event_submit_do_query_1__input_charset_utf8.json"
+  }
+]

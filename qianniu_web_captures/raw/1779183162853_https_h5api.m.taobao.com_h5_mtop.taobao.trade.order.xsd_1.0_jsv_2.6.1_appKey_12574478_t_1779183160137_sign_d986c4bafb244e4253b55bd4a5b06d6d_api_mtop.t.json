@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-05-19 17:32:42",
+  "url": "https://h5api.m.taobao.com/h5/mtop.taobao.trade.order.xsd/1.0/?jsv=2.6.1&appKey=12574478&t=1779183160137&sign=d986c4bafb244e4253b55bd4a5b06d6d&api=mtop.taobao.trade.order.xsd&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp46&data=%7B%7D",
+  "method": "GET",
+  "request": {
+    "params": {
+      "jsv": "2.6.1",
+      "appKey": "12574478",
+      "t": "1779183160137",
+      "sign": "d986c4bafb244e4253b55bd4a5b06d6d",
+      "api": "mtop.taobao.trade.order.xsd",
+      "v": "1.0",
+      "ttid": "11320@taobao_WEB_9.9.99",
+      "dataType": "originaljsonp",
+      "type": "originaljsonp",
+      "callback": "mtopjsonp46",
+      "data": "{}"
+    },
+    "postData": false
+  },
+  "response": {
+    "text": " mtopjsonp46({\"api\":\"mtop.taobao.trade.order.xsd\",\"data\":{},\"ret\":[\"UNKNOWN_FAIL_CODE::系统开小差了，请稍候重试\"],\"traceId\":\"2150447c17791831623003678e1204\",\"v\":\"1.0\"})"
+  },
+  "records": []
+}

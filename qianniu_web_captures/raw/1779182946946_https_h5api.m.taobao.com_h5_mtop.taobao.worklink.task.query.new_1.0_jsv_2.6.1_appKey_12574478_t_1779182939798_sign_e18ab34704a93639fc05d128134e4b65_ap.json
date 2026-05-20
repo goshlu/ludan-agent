@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-05-19 17:29:06",
+  "url": "https://h5api.m.taobao.com/h5/mtop.taobao.worklink.task.query.new/1.0/?jsv=2.6.1&appKey=12574478&t=1779182939798&sign=e18ab34704a93639fc05d128134e4b65&api=mtop.taobao.worklink.task.query.new&v=1.0&ttid=11320%40taobao_WEB_9.9.99&dataType=originaljsonp&type=originaljsonp&callback=mtopjsonp44&data=%7B%22bizCode%22%3A%22all%22%2C%22orderByCreateDate%22%3Atrue%2C%22desc%22%3Atrue%2C%22primaryStatusCode%22%3A%22wait_handle%22%2C%22isAssigned%22%3Atrue%2C%22pageIndex%22%3A1%2C%22pageSize%22%3A3%7D",
+  "method": "GET",
+  "request": {
+    "params": {
+      "jsv": "2.6.1",
+      "appKey": "12574478",
+      "t": "1779182939798",
+      "sign": "e18ab34704a93639fc05d128134e4b65",
+      "api": "mtop.taobao.worklink.task.query.new",
+      "v": "1.0",
+      "ttid": "11320@taobao_WEB_9.9.99",
+      "dataType": "originaljsonp",
+      "type": "originaljsonp",
+      "callback": "mtopjsonp44",
+      "data": "{\"bizCode\":\"all\",\"orderByCreateDate\":true,\"desc\":true,\"primaryStatusCode\":\"wait_handle\",\"isAssigned\":true,\"pageIndex\":1,\"pageSize\":3}"
+    },
+    "postData": false
+  },
+  "response": {
+    "text": " mtopjsonp44({\"api\":\"mtop.taobao.worklink.task.query.new\",\"data\":{\"businessSuccess\":true,\"data\":{\"records\":[],\"recordsStr\":\"[]\",\"totalCount\":0},\"fail\":false,\"totalCount\":0},\"ret\":[\"SUCCESS::调用成功\"],\"traceId\":\"2150431117791829418467141e1088\",\"v\":\"1.0\"})"
+  },
+  "records": []
+}

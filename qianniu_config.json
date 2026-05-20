@@ -1,0 +1,30 @@
+{
+  "quick_copy_button": null,
+  "quick_copy_save_button": null,
+  "buyer_copy_button": {
+    "x": 1322,
+    "y": 303
+  },
+  "right_orders_panel": {
+    "x": 1322,
+    "y": 520
+  },
+  "chat_input": {
+    "x": 691,
+    "y": 719
+  },
+  "remark_button": {
+    "x": 1509,
+    "y": 784
+  },
+  "remark_textarea": {
+    "x": 1264,
+    "y": 693
+  },
+  "remark_save_button": {
+    "x": 1523,
+    "y": 904
+  },
+  "transfer_button": null,
+  "transfer_target": null
+}

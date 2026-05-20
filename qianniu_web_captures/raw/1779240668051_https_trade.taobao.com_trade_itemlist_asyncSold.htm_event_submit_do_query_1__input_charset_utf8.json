@@ -1,0 +1,3779 @@
+{
+  "captured_at": "2026-05-20 09:31:08",
+  "url": "https://trade.taobao.com/trade/itemlist/asyncSold.htm?event_submit_do_query=1&_input_charset=utf8",
+  "method": "POST",
+  "request": {
+    "params": {
+      "event_submit_do_query": "1",
+      "_input_charset": "utf8"
+    },
+    "postData": "isQnNew=true&isHideNick=true&prePageNo=1&sifg=0&action=itemlist%2FSoldQueryAction&close=0&pageNum=1&orderStatus=&rateStatus=&queryMore=false"
+  },
+  "response": {
+    "traceId": "2150469317792406644067673e0e5c",
+    "isQnNewHideNick": "true",
+    "isUnionSearch": "true",
+    "query": {
+      "payDateBegin": 0,
+      "rateStatus": "",
+      "buyerNick": "",
+      "orderStatus": "",
+      "pageSize": 15,
+      "dateEnd": 0,
+      "endTimeBegin": 0,
+      "endTimeEnd": 0,
+      "rxOldFlag": 0,
+      "rxSendFlag": 0,
+      "useCheckcode": false,
+      "dateBegin": 0,
+      "tradeTag": 0,
+      "extra": {},
+      "action": "itemlist/SoldQueryAction",
+      "rxHasSendFlag": 0,
+      "auctionType": 0,
+      "close": 0,
+      "sellerNick": "",
+      "cartItemDOList": [],
+      "notifySendGoodsType": "ALL",
+      "sellerMemoFlag": "0",
+      "useOrderInfo": false,
+      "logisticsService": "",
+      "isQnNew": true,
+      "pageNum": 1,
+      "o2oDeliveryType": "ALL",
+      "rxAuditFlag": 0,
+      "queryOrder": "desc",
+      "holdStatus": 0,
+      "rxElectronicAuditFlag": 0,
+      "queryMore": true,
+      "payDateEnd": 0,
+      "rxWaitSendflag": 0,
+      "sellerMemo": 0,
+      "tabCode": "latest3Months",
+      "rxElectronicAllFlag": 0,
+      "rxSuccessflag": 0,
+      "unionSearchTotalNum": 0,
+      "refund": "",
+      "unionSearchPageNum": 0
+    },
+    "tabs": [
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?userSwitch=1",
+        "code": "latest3Months",
+        "text": "近3个月",
+        "selected": true
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=NOT_PAID&tabCode=waitBuyerPay",
+        "code": "waitBuyerPay",
+        "text": "待付款"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=HOLD&tabCode=confirmation",
+        "code": "confirmation",
+        "text": "确认中"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=PAID&tabCode=waitSend",
+        "code": "waitSend",
+        "text": "待发货"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=PAID&deliveryTimeType=&tabCode=deliveryWillTimeOut",
+        "code": "deliveryWillTimeOut",
+        "text": "即将超时"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=PAID&deliveryTimeType=&tabCode=deliveryHadTimeOut",
+        "code": "deliveryHadTimeOut",
+        "text": "发货已超时"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=SEND&tabCode=haveSendGoods",
+        "code": "haveSendGoods",
+        "text": "已发货"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=REFUNDING&tabCode=refunding",
+        "code": "refunding",
+        "text": "退款中"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=SUCCESS&tabCode=success",
+        "code": "success",
+        "text": "已成功"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=DROP&tabCode=closed",
+        "code": "closed",
+        "text": "已关闭"
+      },
+      {
+        "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldHisQueryAction&event_submit_do_query=1&tabCode=before3Months",
+        "code": "before3Months",
+        "text": "3个月前"
+      }
+    ],
+    "isBatchSearch": "true",
+    "error": "",
+    "isQnNewExportNew": "true",
+    "configurableOptions": {
+      "properties": {
+        "rateStatus": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "13",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "评价状态",
+          "x-index": 8,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "需我评价",
+              "value": "I_HAS_NOT_COMMENT"
+            },
+            {
+              "label": "我已评价",
+              "value": "I_HAS_COMMENT"
+            },
+            {
+              "label": "对方已评",
+              "value": "OTHER_HAS_COMMENT"
+            },
+            {
+              "label": "双方已评",
+              "value": "ALL_COMMENT"
+            }
+          ]
+        },
+        "orderType": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "16",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "订单类型",
+          "x-index": 11,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "机票订单",
+              "value": "1400"
+            },
+            {
+              "label": "数字订单",
+              "value": "1500"
+            },
+            {
+              "label": "理财订单",
+              "value": "3000"
+            },
+            {
+              "label": "网游订单",
+              "value": "900"
+            },
+            {
+              "label": "酒店订单",
+              "value": "710"
+            },
+            {
+              "label": "保险订单",
+              "value": "1102"
+            },
+            {
+              "label": "企采订单",
+              "value": "corpMarket"
+            },
+            {
+              "label": "租赁订单",
+              "value": "leaseMarket"
+            },
+            {
+              "label": "补差订单",
+              "value": "receipt"
+            },
+            {
+              "label": "1元预约",
+              "value": "tind1yyy"
+            },
+            {
+              "label": "预售下沉订单",
+              "value": "ysxc"
+            },
+            {
+              "label": "全款预订订单",
+              "value": "luxuryBooking"
+            },
+            {
+              "label": "试销订单",
+              "value": "newCommodity"
+            },
+            {
+              "label": "礼物订单",
+              "value": "giftOrder"
+            },
+            {
+              "label": "一口价",
+              "value": "yikoujia"
+            },
+            {
+              "label": "拍卖",
+              "value": "paimai"
+            },
+            {
+              "label": "企业购订单",
+              "value": "qiyegou"
+            },
+            {
+              "label": "超链半托管",
+              "value": "bybtbtg"
+            },
+            {
+              "label": "喵住厂购控链",
+              "value": "mzhykltg"
+            },
+            {
+              "label": "产地优选热销超链",
+              "value": "cdyxcl"
+            },
+            {
+              "label": "服饰全托管",
+              "value": "88fscl"
+            },
+            {
+              "label": "数生电子凭证超链",
+              "value": "szsh"
+            },
+            {
+              "label": "百亿补贴审核订单",
+              "value": "holdStatus"
+            },
+            {
+              "label": "以旧换新政府补贴订单",
+              "value": "zfbt"
+            },
+            {
+              "label": "定制订单",
+              "value": "dingzhi"
+            },
+            {
+              "label": "闲鱼清仓",
+              "value": "xyoutletOrder"
+            },
+            {
+              "label": "乡村件订单",
+              "value": "xcjOrder"
+            },
+            {
+              "label": "挑战计划中奖用户订单",
+              "value": "cpwinOrder"
+            }
+          ]
+        },
+        "notifySendGoodsType": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "10",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "催发货订单",
+          "x-index": 5,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "买家催发货订单",
+              "value": "notifySendGoods"
+            }
+          ]
+        },
+        "itemTitle": {
+          "x-decorator": "FormItem",
+          "x-component": "Input",
+          "x-decorator-props": {},
+          "id": "8",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "宝贝名称",
+          "x-index": 4
+        },
+        "orderStatus": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "3",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "订单状态",
+          "x-index": 0,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "等待买家付款",
+              "value": "NOT_PAID"
+            },
+            {
+              "label": "订单确认中",
+              "value": "HOLD"
+            },
+            {
+              "label": "买家已付款",
+              "value": "PAID"
+            },
+            {
+              "label": "卖家已发货",
+              "value": "SEND"
+            },
+            {
+              "label": "交易成功",
+              "value": "SUCCESS"
+            },
+            {
+              "label": "交易关闭",
+              "value": "DROP"
+            },
+            {
+              "label": "待付款和待发货订单",
+              "value": "NOT_PAID_AND_NOT_SEND"
+            },
+            {
+              "label": "未完成的订单",
+              "value": "NOT_FINISHED"
+            },
+            {
+              "label": "退款中的订单",
+              "value": "REFUNDING"
+            },
+            {
+              "label": "定金已付",
+              "value": "FRONT_PAID"
+            },
+            {
+              "label": "异常订单",
+              "value": "EXCEPTIONAL"
+            }
+          ]
+        },
+        "[endTimeBegin,endTimeEnd]": {
+          "x-decorator": "FormItem",
+          "x-component": "DateRangePicker",
+          "x-decorator-props": {},
+          "id": "26",
+          "x-component-props": {
+            "showTime": {
+              "format": "HH:mm:ss"
+            }
+          },
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "确认收货时间",
+          "x-index": 15
+        },
+        "logisticsService": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "14",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "物流服务",
+          "x-index": 9,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "货到付款",
+              "value": "COD"
+            },
+            {
+              "label": "卖家物流",
+              "value": "SELLER_PAYED"
+            },
+            {
+              "label": "选时达",
+              "value": "SELECT_TIME_DELIVERY"
+            },
+            {
+              "label": "加价选顺丰-自行联系",
+              "value": "zxkf_sf"
+            },
+            {
+              "label": "加价选顺丰-托管模式",
+              "value": "zxkf_sf_tg"
+            },
+            {
+              "label": "新疆中转",
+              "value": "PYXJ"
+            },
+            {
+              "label": "宁夏中转",
+              "value": "PYNX"
+            },
+            {
+              "label": "青海中转",
+              "value": "PYQH"
+            },
+            {
+              "label": "甘肃中转",
+              "value": "PYGS"
+            },
+            {
+              "label": "西藏中转",
+              "value": "PYXZ"
+            },
+            {
+              "label": "内蒙古中转",
+              "value": "PYNMG"
+            }
+          ]
+        },
+        "receiverRealName": {
+          "x-decorator": "FormItem",
+          "x-component": "Input",
+          "x-decorator-props": {},
+          "id": "20",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "收件人姓名",
+          "x-index": 12
+        },
+        "giftReceiverNick": {
+          "x-decorator": "FormItem",
+          "x-component": "Input",
+          "x-decorator-props": {},
+          "id": "25",
+          "x-component-props": {
+            "placeholder": "仅对礼物订单生效"
+          },
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "收礼人昵称",
+          "x-index": 14
+        },
+        "receiverPhone": {
+          "x-decorator": "FormItem",
+          "x-component": "Input",
+          "x-decorator-props": {},
+          "id": "21",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "收件人手机号",
+          "x-index": 13
+        },
+        "payMethodType": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "24",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "支付方式",
+          "x-index": 10,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "对公支付",
+              "value": "duigongzhifu"
+            },
+            {
+              "label": "先用后付",
+              "value": "xyhf"
+            },
+            {
+              "label": "先采后付(企业采购)",
+              "value": "XCHF"
+            },
+            {
+              "label": "微信支付",
+              "value": "wxpay"
+            },
+            {
+              "label": "码上收订单",
+              "value": "mss"
+            },
+            {
+              "label": "分期支付",
+              "value": "fqzf"
+            },
+            {
+              "label": "他人代付",
+              "value": "daifu"
+            }
+          ]
+        },
+        "deliveryTimeType": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "6",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "承诺发货时间",
+          "x-index": 3,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "已过发货时间",
+              "value": "deliveryHadTimeOut"
+            },
+            {
+              "label": "12小时内需要发货",
+              "value": "deliveryWillTimeOutTwelveHours"
+            },
+            {
+              "label": "今天需要发货",
+              "value": "deliveryWillTimeOutToday"
+            },
+            {
+              "label": "三天内需要发货",
+              "value": "deliveryWillTimeOutThreeDay"
+            },
+            {
+              "label": "三天后需要发货",
+              "value": "deliveryWillTimeOutThreeDayAfter"
+            }
+          ]
+        },
+        "[dateBegin,dateEnd]": {
+          "x-decorator": "FormItem",
+          "x-component": "DateRangePicker",
+          "x-decorator-props": {},
+          "id": "11",
+          "x-component-props": {
+            "showTime": {
+              "format": "HH:mm:ss"
+            }
+          },
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "创建时间",
+          "x-index": 6
+        },
+        "yushouStatus": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "4",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "预售状态",
+          "x-index": 1,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "预付款已付未确认",
+              "value": "waitConfirm"
+            },
+            {
+              "label": "已确认未付尾款",
+              "value": "waitPayWeikuan"
+            },
+            {
+              "label": "预售下沉成功",
+              "value": "xiachenSuccess"
+            },
+            {
+              "label": "预售下沉失败",
+              "value": "xiachenFailed"
+            },
+            {
+              "label": "已交接快递",
+              "value": "expressPassed"
+            },
+            {
+              "label": "客服登记 买家已申请退定金",
+              "value": "buyerRequestDepositRefundByService"
+            },
+            {
+              "label": "店小蜜登记 买家已申请退定金",
+              "value": "buyerRequestDepositRefundByDianxiaomi"
+            }
+          ]
+        },
+        "refund": {
+          "default": "ALL",
+          "x-decorator": "FormItem",
+          "x-component": "Select",
+          "x-decorator-props": {},
+          "id": "5",
+          "x-component-props": {},
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "售后服务",
+          "x-index": 2,
+          "enum": [
+            {
+              "label": "全部",
+              "value": "ALL"
+            },
+            {
+              "label": "买家投诉",
+              "value": "BUYER_SUIT"
+            },
+            {
+              "label": "我已投诉",
+              "value": "SELLER_SUIT"
+            },
+            {
+              "label": "退款中",
+              "value": "REFUNDING"
+            }
+          ]
+        },
+        "[payDateBegin,payDateEnd]": {
+          "x-decorator": "FormItem",
+          "x-component": "DateRangePicker",
+          "x-decorator-props": {},
+          "id": "12",
+          "x-component-props": {
+            "showTime": {
+              "format": "HH:mm:ss"
+            }
+          },
+          "x-validator": [],
+          "x-disabled": false,
+          "title": "付款时间",
+          "x-index": 7
+        }
+      }
+    },
+    "extra": {
+      "batchFlagUrl": "//trade.taobao.com/trade/memo/update_sell_memo.htm",
+      "batchFreePostUrl": "//trade.taobao.com/trade/freePostFee.htm",
+      "close_flag_visible": true,
+      "durexURI": "//aq.taobao.com/durex/validate",
+      "batchSendGoodsUrl": "//trade.taobao.com/trade/wuliuListScreen.htm",
+      "newOptions": true,
+      "isOldQnNewExport": true,
+      "needAuth": true,
+      "preRenderBatchSendGoods": true,
+      "tjbPriority": 0,
+      "newModifyFee": true,
+      "queryTitleMaxSize": 15,
+      "shipSupportVirtual": true,
+      "useExportPrepare": "true",
+      "durexReturnURI": "//trade.taobao.com/trade/itemlist/mid/durex.htm",
+      "exportSupportTypes": {
+        "1": [
+          "xlsx",
+          "csv"
+        ],
+        "2": [
+          "xlsx",
+          "csv"
+        ],
+        "3": [
+          "xlsx"
+        ]
+      },
+      "batchButtonListV2": "{\"outButtonList\":[{\"buttonText\":\"批量发货\",\"buttonType\":\"batchShipment\",\"params\":{\"url\":\"//trade.taobao.com/trade/wuliuListScreen.htm\",\"preRenderBatchSendGoods\":\"true\"}},{\"buttonText\":\"批量标记\",\"buttonType\":\"batchMark\",\"params\":{}},{\"buttonText\":\"批量免运费\",\"buttonType\":\"batchFreeShip\",\"params\":{\"url\":\"//trade.taobao.com/trade/freePostFee.htm\"}}],\"insideButtonList\":[{\"buttonText\":\"批量导入识别码\",\"buttonType\":\"batchImportSn\",\"params\":{}},{\"actionType\":\"jump\",\"buttonText\":\"去发优惠券\",\"domainTags\":[],\"params\":{\"jumpUrl\":\"https://qn.taobao.com/home.htm/coupon/create?couponType=0&tagId=1977850001\"},\"serviceTags\":[],\"styleType\":\"normal\"}]}",
+      "batchSendGoods": true,
+      "newSellerMemo": true,
+      "batchUploadBybtSn": true
+    },
+    "queryOption": {
+      "rateStatus": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "需我评价",
+          "value": "I_HAS_NOT_COMMENT"
+        },
+        {
+          "label": "我已评价",
+          "value": "I_HAS_COMMENT"
+        },
+        {
+          "label": "对方已评",
+          "value": "OTHER_HAS_COMMENT"
+        },
+        {
+          "label": "双方已评",
+          "value": "ALL_COMMENT"
+        }
+      ],
+      "bizType": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "机票订单",
+          "value": "1400"
+        },
+        {
+          "label": "数字订单",
+          "value": "1500"
+        },
+        {
+          "label": "理财订单",
+          "value": "3000"
+        },
+        {
+          "label": "网游订单",
+          "value": "900"
+        },
+        {
+          "label": "酒店订单",
+          "value": "710"
+        },
+        {
+          "label": "保险订单",
+          "value": "1102"
+        },
+        {
+          "label": "企采订单",
+          "value": "corpMarket"
+        },
+        {
+          "label": "租赁订单",
+          "value": "leaseMarket"
+        },
+        {
+          "label": "补差订单",
+          "value": "receipt"
+        },
+        {
+          "label": "1元预约",
+          "value": "tind1yyy"
+        },
+        {
+          "label": "预售下沉订单",
+          "value": "ysxc"
+        },
+        {
+          "label": "全款预订订单",
+          "value": "luxuryBooking"
+        },
+        {
+          "label": "试销订单",
+          "value": "newCommodity"
+        }
+      ],
+      "holdStatus": [
+        {
+          "label": "全部",
+          "value": 0
+        },
+        {
+          "label": "百补hold单",
+          "value": 1
+        }
+      ],
+      "sellerMemoFlag": [
+        {
+          "label": "全部",
+          "value": "0"
+        },
+        {
+          "label": "有备注",
+          "value": "1"
+        },
+        {
+          "label": "无备注",
+          "value": "2"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-0"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i4/O1CN015SWzPn1ZYOkHKAWft_!!6000000003206-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-1"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i1/O1CN01Fa6Umz1Ogg8KPBs7v_!!6000000001735-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-2"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i1/O1CN01k0ngrS1V1BYrUHZdq_!!6000000002592-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-3"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i1/O1CN017XjC2z1fqcC4n8bGZ_!!6000000004058-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-4"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i3/O1CN01cXPJrS1BzNIMCmPdu_!!6000000000016-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-5"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i4/O1CN01vyXd551Cl0UACTeUU_!!6000000000120-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-6"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i3/O1CN01jD2t3W1l7cz6AuOFs_!!6000000004772-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-7"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i2/O1CN01psQtR61F19gOdPL2a_!!6000000000426-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-8"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i2/O1CN01FhK38d1THYU6uQ4ky_!!6000000002357-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-9"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i4/O1CN01egzLwc1qlzyT9AvW9_!!6000000005537-2-tps-120-120.png?getAvatar=avatar",
+          "value": "F-10"
+        },
+        {
+          "label": "https://img.alicdn.com/imgextra/i2/O1CN019Vns2X1CykVI17vO6_!!6000000000150-2-tps-200-200.png",
+          "value": "F-11"
+        }
+      ],
+      "deliveryTimeType": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "已过发货时间",
+          "value": "deliveryHadTimeOut"
+        },
+        {
+          "label": "12小时内需要发货",
+          "value": "deliveryWillTimeOutTwelveHours"
+        },
+        {
+          "label": "今天内需要发货",
+          "value": "deliveryWillTimeOutToday"
+        },
+        {
+          "label": "三天内需要发货",
+          "value": "deliveryWillTimeOutThreeDay"
+        },
+        {
+          "label": "三天后需要发货",
+          "value": "deliveryWillTimeOutThreeDayAfter"
+        }
+      ],
+      "orderStatus": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "等待买家付款",
+          "value": "NOT_PAID"
+        },
+        {
+          "label": "订单确认中",
+          "value": "HOLD"
+        },
+        {
+          "label": "买家已付款",
+          "value": "PAID"
+        },
+        {
+          "label": "卖家已发货",
+          "value": "SEND"
+        },
+        {
+          "label": "交易成功",
+          "value": "SUCCESS"
+        },
+        {
+          "label": "交易关闭",
+          "value": "DROP"
+        },
+        {
+          "label": "待付款和待发货订单",
+          "value": "NOT_PAID_AND_NOT_SEND"
+        },
+        {
+          "label": "未完成的订单",
+          "value": "NOT_FINISHED"
+        },
+        {
+          "label": "退款中的订单",
+          "value": "REFUNDING"
+        },
+        {
+          "label": "定金已付",
+          "value": "FRONT_PAID"
+        },
+        {
+          "label": "异常订单",
+          "value": "EXCEPTIONAL"
+        }
+      ],
+      "aftersaleType": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "买家投诉",
+          "value": "BUYER_SUIT"
+        },
+        {
+          "label": "我已投诉",
+          "value": "SELLER_SUIT"
+        },
+        {
+          "label": "退款中",
+          "value": "REFUNDING"
+        }
+      ],
+      "notifySendGoodsList": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "买家催发货订单",
+          "value": "notifySendGoods"
+        }
+      ],
+      "sellerMemo": [
+        {
+          "label": "全部",
+          "value": "0"
+        },
+        {
+          "label": "有备注",
+          "value": "1"
+        },
+        {
+          "label": "无备注",
+          "value": "2"
+        }
+      ],
+      "logisticsType": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "货到付款",
+          "value": "COD"
+        },
+        {
+          "label": "卖家物流",
+          "value": "SELLER_PAYED"
+        },
+        {
+          "label": "选时达",
+          "value": "SELECT_TIME_DELIVERY"
+        }
+      ],
+      "preSaleTradeType": [
+        {
+          "label": "全部",
+          "value": "ALL"
+        },
+        {
+          "label": "预付款已付未确认",
+          "value": "waitConfirm"
+        },
+        {
+          "label": "已确认未付尾款",
+          "value": "waitPayWeikuan"
+        },
+        {
+          "label": "预售下沉成功",
+          "value": "xiachenSuccess"
+        },
+        {
+          "label": "预售下沉失败",
+          "value": "xiachenFailed"
+        },
+        {
+          "label": "已交接快递",
+          "value": "expressPassed"
+        },
+        {
+          "label": "客服登记 买家已申请退定金",
+          "value": "buyerRequestDepositRefundByService"
+        },
+        {
+          "label": "店小蜜登记 买家已申请退定金",
+          "value": "buyerRequestDepositRefundByDianxiaomi"
+        }
+      ],
+      "commonTradeType": [
+        {
+          "label": "所有类型",
+          "value": 0
+        },
+        {
+          "label": "一口价",
+          "value": 1
+        },
+        {
+          "label": "拍卖",
+          "value": 2
+        }
+      ]
+    },
+    "page": {
+      "totalNumber": 3,
+      "totalPage": 1,
+      "globalCodes": [],
+      "pageSize": 15,
+      "queryForTitle": false,
+      "currentPage": 1
+    },
+    "mainOrders": [
+      {
+        "operations": [
+          {
+            "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116422962298007632",
+            "style": "thead",
+            "id": "flag",
+            "text": "编辑标记信息，仅自己可见",
+            "type": "operation",
+            "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116422962298007632&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+          }
+        ],
+        "statusInfo": {
+          "operations": [
+            {
+              "style": "t16",
+              "text": "详情",
+              "params": {
+                "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116422962298007632",
+                "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+              },
+              "type": "operation",
+              "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+            },
+            {
+              "style": "t16",
+              "id": "onlinedelivery",
+              "text": "寄件",
+              "type": "operation",
+              "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116422962298007632"
+            },
+            {
+              "style": "t16",
+              "id": "printWaybill",
+              "text": "打单",
+              "type": "operation",
+              "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116422962298007632"
+            },
+            {
+              "style": "t3",
+              "text": "发货",
+              "type": "operation",
+              "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116422962298007632&bizType=200"
+            }
+          ],
+          "text": "买家已付款",
+          "type": "t1"
+        },
+        "extra": {
+          "sellerFlag": 0,
+          "currencySymbol": "￥",
+          "inHold": false,
+          "isShowSellerService": false,
+          "currency": "CNY",
+          "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+          "batchSendGoods": 0,
+          "disableCheckbox": false
+        },
+        "orderInfo": {
+          "createTime": "2026-05-20 09:29:45",
+          "id": "5116422962298007632"
+        },
+        "id": "5116422962298007632",
+        "subOrders": [
+          {
+            "idStr": "5116422962298007632",
+            "priceInfo": {
+              "realTotal": "0.01"
+            },
+            "quantity": "1",
+            "returnAddressVO": {
+              "historyShow": false
+            },
+            "id": 5116422962298007632,
+            "itemInfo": {
+              "skuText": [
+                {
+                  "visible": "SOLID",
+                  "name": "客服服务时段",
+                  "value": "7×24小时"
+                }
+              ],
+              "extra": [
+                {
+                  "visible": "SOLID",
+                  "value": "当前订单无发货时间和发货倒计时信息"
+                }
+              ],
+              "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+              "shipCountDownTime": "",
+              "title": "测试游戏类目",
+              "serviceIcons": [
+                {
+                  "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                  "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                  "type": 3,
+                  "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+                }
+              ],
+              "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116422962298007632&snapShot=true",
+              "skuId": 0,
+              "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+            }
+          }
+        ],
+        "payInfo": {
+          "postType": "(虚拟物品)",
+          "icons": [
+            {
+              "linkTitle": "该订单来自您的手机淘宝店铺",
+              "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+              "type": 3,
+              "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+            }
+          ],
+          "actualFee": "0.01"
+        },
+        "buyer": {
+          "nick": "f**",
+          "operations": [
+            {
+              "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+              "action": "a14",
+              "style": "t0",
+              "title": "查询该买家订单",
+              "type": "operation",
+              "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+            }
+          ],
+          "memberUrl": "",
+          "phoneNum": "150********",
+          "encodeNick": "f**",
+          "id": 0,
+          "guestUser": false,
+          "encodeId": "RAzN8HWKz2HR1am77BX7dBjic84q75v7Kj8vJVa6RSa6F6dNmKZ"
+        },
+        "presentOrder": false
+      },
+      {
+        "operations": [
+          {
+            "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116291202875019545",
+            "style": "thead",
+            "id": "flag",
+            "text": "编辑标记信息，仅自己可见",
+            "type": "operation",
+            "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116291202875019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+          }
+        ],
+        "statusInfo": {
+          "operations": [
+            {
+              "style": "t16",
+              "text": "详情",
+              "params": {
+                "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116291202875019545",
+                "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+              },
+              "type": "operation",
+              "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+            },
+            {
+              "style": "t16",
+              "id": "onlinedelivery",
+              "text": "寄件",
+              "type": "operation",
+              "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116291202875019545"
+            },
+            {
+              "style": "t16",
+              "id": "printWaybill",
+              "text": "打单",
+              "type": "operation",
+              "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116291202875019545"
+            },
+            {
+              "style": "t3",
+              "text": "发货",
+              "type": "operation",
+              "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116291202875019545&bizType=200"
+            }
+          ],
+          "text": "买家已付款",
+          "type": "t1"
+        },
+        "extra": {
+          "sellerFlag": 0,
+          "currencySymbol": "￥",
+          "inHold": false,
+          "isShowSellerService": false,
+          "currency": "CNY",
+          "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+          "batchSendGoods": 0,
+          "disableCheckbox": false
+        },
+        "orderInfo": {
+          "createTime": "2026-05-19 14:36:19",
+          "id": "5116291202875019545"
+        },
+        "id": "5116291202875019545",
+        "subOrders": [
+          {
+            "idStr": "5116291202875019545",
+            "priceInfo": {
+              "realTotal": "0.01"
+            },
+            "quantity": "1",
+            "returnAddressVO": {
+              "historyShow": false
+            },
+            "id": 5116291202875019545,
+            "itemInfo": {
+              "skuText": [
+                {
+                  "visible": "SOLID",
+                  "name": "客服服务时段",
+                  "value": "7×24小时"
+                }
+              ],
+              "extra": [
+                {
+                  "visible": "SOLID",
+                  "value": "当前订单无发货时间和发货倒计时信息"
+                }
+              ],
+              "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+              "shipCountDownTime": "",
+              "title": "测试游戏类目",
+              "serviceIcons": [
+                {
+                  "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                  "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                  "type": 3,
+                  "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+                }
+              ],
+              "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116291202875019545&snapShot=true",
+              "skuId": 0,
+              "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+            }
+          }
+        ],
+        "payInfo": {
+          "postType": "(虚拟物品)",
+          "icons": [
+            {
+              "linkTitle": "该订单来自您的手机淘宝店铺",
+              "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+              "type": 3,
+              "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+            }
+          ],
+          "actualFee": "0.01"
+        },
+        "buyer": {
+          "nick": "爱**",
+          "operations": [
+            {
+              "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+              "action": "a14",
+              "style": "t0",
+              "title": "查询该买家订单",
+              "type": "operation",
+              "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+            }
+          ],
+          "memberUrl": "",
+          "phoneNum": "152********",
+          "encodeNick": "爱**",
+          "id": 0,
+          "guestUser": false,
+          "encodeId": "RAzN8HWLKDv5z3c1VZHmAEsWUfWwdXCnwcUwC6E7s6PeQFpqCSm"
+        },
+        "presentOrder": false
+      },
+      {
+        "operations": [
+          {
+            "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116280942197019545",
+            "style": "thead",
+            "id": "flag",
+            "text": "编辑标记信息，仅自己可见",
+            "type": "operation",
+            "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116280942197019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+          }
+        ],
+        "statusInfo": {
+          "operations": [
+            {
+              "style": "t16",
+              "text": "详情",
+              "params": {
+                "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116280942197019545",
+                "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+              },
+              "type": "operation",
+              "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+            },
+            {
+              "style": "t16",
+              "id": "onlinedelivery",
+              "text": "寄件",
+              "type": "operation",
+              "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116280942197019545"
+            },
+            {
+              "style": "t16",
+              "id": "printWaybill",
+              "text": "打单",
+              "type": "operation",
+              "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116280942197019545"
+            },
+            {
+              "style": "t3",
+              "text": "发货",
+              "type": "operation",
+              "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116280942197019545&bizType=200"
+            }
+          ],
+          "text": "买家已付款",
+          "type": "t1"
+        },
+        "extra": {
+          "sellerFlag": 0,
+          "currencySymbol": "￥",
+          "inHold": false,
+          "isShowSellerService": false,
+          "currency": "CNY",
+          "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+          "batchSendGoods": 0,
+          "disableCheckbox": false
+        },
+        "orderInfo": {
+          "createTime": "2026-05-19 13:12:32",
+          "id": "5116280942197019545"
+        },
+        "id": "5116280942197019545",
+        "subOrders": [
+          {
+            "idStr": "5116280942197019545",
+            "priceInfo": {
+              "realTotal": "0.01"
+            },
+            "quantity": "1",
+            "returnAddressVO": {
+              "historyShow": false
+            },
+            "id": 5116280942197019545,
+            "itemInfo": {
+              "skuText": [
+                {
+                  "visible": "SOLID",
+                  "name": "客服服务时段",
+                  "value": "7×24小时"
+                }
+              ],
+              "extra": [
+                {
+                  "visible": "SOLID",
+                  "value": "当前订单无发货时间和发货倒计时信息"
+                }
+              ],
+              "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+              "shipCountDownTime": "",
+              "title": "测试游戏类目",
+              "serviceIcons": [
+                {
+                  "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                  "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                  "type": 3,
+                  "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+                }
+              ],
+              "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116280942197019545&snapShot=true",
+              "skuId": 0,
+              "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+            }
+          }
+        ],
+        "payInfo": {
+          "postType": "(虚拟物品)",
+          "icons": [
+            {
+              "linkTitle": "该订单来自您的手机淘宝店铺",
+              "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+              "type": 3,
+              "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+            }
+          ],
+          "actualFee": "0.01"
+        },
+        "buyer": {
+          "nick": "爱**",
+          "operations": [
+            {
+              "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+              "action": "a14",
+              "style": "t0",
+              "title": "查询该买家订单",
+              "type": "operation",
+              "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+            }
+          ],
+          "memberUrl": "",
+          "phoneNum": "152********",
+          "encodeNick": "爱**",
+          "id": 0,
+          "guestUser": false,
+          "encodeId": "RAzN8HWLKDv5z3c1VZHmAEsWUfWwdXCnwcUwC6E7s6PeQFpqCSm"
+        },
+        "presentOrder": false
+      }
+    ]
+  },
+  "records": [
+    {
+      "traceId": "2150469317792406644067673e0e5c",
+      "isQnNewHideNick": "true",
+      "isUnionSearch": "true",
+      "query": {
+        "payDateBegin": 0,
+        "rateStatus": "",
+        "buyerNick": "",
+        "orderStatus": "",
+        "pageSize": 15,
+        "dateEnd": 0,
+        "endTimeBegin": 0,
+        "endTimeEnd": 0,
+        "rxOldFlag": 0,
+        "rxSendFlag": 0,
+        "useCheckcode": false,
+        "dateBegin": 0,
+        "tradeTag": 0,
+        "extra": {},
+        "action": "itemlist/SoldQueryAction",
+        "rxHasSendFlag": 0,
+        "auctionType": 0,
+        "close": 0,
+        "sellerNick": "",
+        "cartItemDOList": [],
+        "notifySendGoodsType": "ALL",
+        "sellerMemoFlag": "0",
+        "useOrderInfo": false,
+        "logisticsService": "",
+        "isQnNew": true,
+        "pageNum": 1,
+        "o2oDeliveryType": "ALL",
+        "rxAuditFlag": 0,
+        "queryOrder": "desc",
+        "holdStatus": 0,
+        "rxElectronicAuditFlag": 0,
+        "queryMore": true,
+        "payDateEnd": 0,
+        "rxWaitSendflag": 0,
+        "sellerMemo": 0,
+        "tabCode": "latest3Months",
+        "rxElectronicAllFlag": 0,
+        "rxSuccessflag": 0,
+        "unionSearchTotalNum": 0,
+        "refund": "",
+        "unionSearchPageNum": 0
+      },
+      "tabs": [
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?userSwitch=1",
+          "code": "latest3Months",
+          "text": "近3个月",
+          "selected": true
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=NOT_PAID&tabCode=waitBuyerPay",
+          "code": "waitBuyerPay",
+          "text": "待付款"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=HOLD&tabCode=confirmation",
+          "code": "confirmation",
+          "text": "确认中"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=PAID&tabCode=waitSend",
+          "code": "waitSend",
+          "text": "待发货"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=PAID&deliveryTimeType=&tabCode=deliveryWillTimeOut",
+          "code": "deliveryWillTimeOut",
+          "text": "即将超时"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=PAID&deliveryTimeType=&tabCode=deliveryHadTimeOut",
+          "code": "deliveryHadTimeOut",
+          "text": "发货已超时"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=SEND&tabCode=haveSendGoods",
+          "code": "haveSendGoods",
+          "text": "已发货"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=REFUNDING&tabCode=refunding",
+          "code": "refunding",
+          "text": "退款中"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=SUCCESS&tabCode=success",
+          "code": "success",
+          "text": "已成功"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1&auctionStatus=DROP&tabCode=closed",
+          "code": "closed",
+          "text": "已关闭"
+        },
+        {
+          "herf": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldHisQueryAction&event_submit_do_query=1&tabCode=before3Months",
+          "code": "before3Months",
+          "text": "3个月前"
+        }
+      ],
+      "isBatchSearch": "true",
+      "error": "",
+      "isQnNewExportNew": "true",
+      "configurableOptions": {
+        "properties": {
+          "rateStatus": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "13",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "评价状态",
+            "x-index": 8,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "需我评价",
+                "value": "I_HAS_NOT_COMMENT"
+              },
+              {
+                "label": "我已评价",
+                "value": "I_HAS_COMMENT"
+              },
+              {
+                "label": "对方已评",
+                "value": "OTHER_HAS_COMMENT"
+              },
+              {
+                "label": "双方已评",
+                "value": "ALL_COMMENT"
+              }
+            ]
+          },
+          "orderType": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "16",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "订单类型",
+            "x-index": 11,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "机票订单",
+                "value": "1400"
+              },
+              {
+                "label": "数字订单",
+                "value": "1500"
+              },
+              {
+                "label": "理财订单",
+                "value": "3000"
+              },
+              {
+                "label": "网游订单",
+                "value": "900"
+              },
+              {
+                "label": "酒店订单",
+                "value": "710"
+              },
+              {
+                "label": "保险订单",
+                "value": "1102"
+              },
+              {
+                "label": "企采订单",
+                "value": "corpMarket"
+              },
+              {
+                "label": "租赁订单",
+                "value": "leaseMarket"
+              },
+              {
+                "label": "补差订单",
+                "value": "receipt"
+              },
+              {
+                "label": "1元预约",
+                "value": "tind1yyy"
+              },
+              {
+                "label": "预售下沉订单",
+                "value": "ysxc"
+              },
+              {
+                "label": "全款预订订单",
+                "value": "luxuryBooking"
+              },
+              {
+                "label": "试销订单",
+                "value": "newCommodity"
+              },
+              {
+                "label": "礼物订单",
+                "value": "giftOrder"
+              },
+              {
+                "label": "一口价",
+                "value": "yikoujia"
+              },
+              {
+                "label": "拍卖",
+                "value": "paimai"
+              },
+              {
+                "label": "企业购订单",
+                "value": "qiyegou"
+              },
+              {
+                "label": "超链半托管",
+                "value": "bybtbtg"
+              },
+              {
+                "label": "喵住厂购控链",
+                "value": "mzhykltg"
+              },
+              {
+                "label": "产地优选热销超链",
+                "value": "cdyxcl"
+              },
+              {
+                "label": "服饰全托管",
+                "value": "88fscl"
+              },
+              {
+                "label": "数生电子凭证超链",
+                "value": "szsh"
+              },
+              {
+                "label": "百亿补贴审核订单",
+                "value": "holdStatus"
+              },
+              {
+                "label": "以旧换新政府补贴订单",
+                "value": "zfbt"
+              },
+              {
+                "label": "定制订单",
+                "value": "dingzhi"
+              },
+              {
+                "label": "闲鱼清仓",
+                "value": "xyoutletOrder"
+              },
+              {
+                "label": "乡村件订单",
+                "value": "xcjOrder"
+              },
+              {
+                "label": "挑战计划中奖用户订单",
+                "value": "cpwinOrder"
+              }
+            ]
+          },
+          "notifySendGoodsType": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "10",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "催发货订单",
+            "x-index": 5,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "买家催发货订单",
+                "value": "notifySendGoods"
+              }
+            ]
+          },
+          "itemTitle": {
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+            "x-decorator-props": {},
+            "id": "8",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "宝贝名称",
+            "x-index": 4
+          },
+          "orderStatus": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "3",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "订单状态",
+            "x-index": 0,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "等待买家付款",
+                "value": "NOT_PAID"
+              },
+              {
+                "label": "订单确认中",
+                "value": "HOLD"
+              },
+              {
+                "label": "买家已付款",
+                "value": "PAID"
+              },
+              {
+                "label": "卖家已发货",
+                "value": "SEND"
+              },
+              {
+                "label": "交易成功",
+                "value": "SUCCESS"
+              },
+              {
+                "label": "交易关闭",
+                "value": "DROP"
+              },
+              {
+                "label": "待付款和待发货订单",
+                "value": "NOT_PAID_AND_NOT_SEND"
+              },
+              {
+                "label": "未完成的订单",
+                "value": "NOT_FINISHED"
+              },
+              {
+                "label": "退款中的订单",
+                "value": "REFUNDING"
+              },
+              {
+                "label": "定金已付",
+                "value": "FRONT_PAID"
+              },
+              {
+                "label": "异常订单",
+                "value": "EXCEPTIONAL"
+              }
+            ]
+          },
+          "[endTimeBegin,endTimeEnd]": {
+            "x-decorator": "FormItem",
+            "x-component": "DateRangePicker",
+            "x-decorator-props": {},
+            "id": "26",
+            "x-component-props": {
+              "showTime": {
+                "format": "HH:mm:ss"
+              }
+            },
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "确认收货时间",
+            "x-index": 15
+          },
+          "logisticsService": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "14",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "物流服务",
+            "x-index": 9,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "货到付款",
+                "value": "COD"
+              },
+              {
+                "label": "卖家物流",
+                "value": "SELLER_PAYED"
+              },
+              {
+                "label": "选时达",
+                "value": "SELECT_TIME_DELIVERY"
+              },
+              {
+                "label": "加价选顺丰-自行联系",
+                "value": "zxkf_sf"
+              },
+              {
+                "label": "加价选顺丰-托管模式",
+                "value": "zxkf_sf_tg"
+              },
+              {
+                "label": "新疆中转",
+                "value": "PYXJ"
+              },
+              {
+                "label": "宁夏中转",
+                "value": "PYNX"
+              },
+              {
+                "label": "青海中转",
+                "value": "PYQH"
+              },
+              {
+                "label": "甘肃中转",
+                "value": "PYGS"
+              },
+              {
+                "label": "西藏中转",
+                "value": "PYXZ"
+              },
+              {
+                "label": "内蒙古中转",
+                "value": "PYNMG"
+              }
+            ]
+          },
+          "receiverRealName": {
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+            "x-decorator-props": {},
+            "id": "20",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "收件人姓名",
+            "x-index": 12
+          },
+          "giftReceiverNick": {
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+            "x-decorator-props": {},
+            "id": "25",
+            "x-component-props": {
+              "placeholder": "仅对礼物订单生效"
+            },
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "收礼人昵称",
+            "x-index": 14
+          },
+          "receiverPhone": {
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+            "x-decorator-props": {},
+            "id": "21",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "收件人手机号",
+            "x-index": 13
+          },
+          "payMethodType": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "24",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "支付方式",
+            "x-index": 10,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "对公支付",
+                "value": "duigongzhifu"
+              },
+              {
+                "label": "先用后付",
+                "value": "xyhf"
+              },
+              {
+                "label": "先采后付(企业采购)",
+                "value": "XCHF"
+              },
+              {
+                "label": "微信支付",
+                "value": "wxpay"
+              },
+              {
+                "label": "码上收订单",
+                "value": "mss"
+              },
+              {
+                "label": "分期支付",
+                "value": "fqzf"
+              },
+              {
+                "label": "他人代付",
+                "value": "daifu"
+              }
+            ]
+          },
+          "deliveryTimeType": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "6",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "承诺发货时间",
+            "x-index": 3,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "已过发货时间",
+                "value": "deliveryHadTimeOut"
+              },
+              {
+                "label": "12小时内需要发货",
+                "value": "deliveryWillTimeOutTwelveHours"
+              },
+              {
+                "label": "今天需要发货",
+                "value": "deliveryWillTimeOutToday"
+              },
+              {
+                "label": "三天内需要发货",
+                "value": "deliveryWillTimeOutThreeDay"
+              },
+              {
+                "label": "三天后需要发货",
+                "value": "deliveryWillTimeOutThreeDayAfter"
+              }
+            ]
+          },
+          "[dateBegin,dateEnd]": {
+            "x-decorator": "FormItem",
+            "x-component": "DateRangePicker",
+            "x-decorator-props": {},
+            "id": "11",
+            "x-component-props": {
+              "showTime": {
+                "format": "HH:mm:ss"
+              }
+            },
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "创建时间",
+            "x-index": 6
+          },
+          "yushouStatus": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "4",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "预售状态",
+            "x-index": 1,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "预付款已付未确认",
+                "value": "waitConfirm"
+              },
+              {
+                "label": "已确认未付尾款",
+                "value": "waitPayWeikuan"
+              },
+              {
+                "label": "预售下沉成功",
+                "value": "xiachenSuccess"
+              },
+              {
+                "label": "预售下沉失败",
+                "value": "xiachenFailed"
+              },
+              {
+                "label": "已交接快递",
+                "value": "expressPassed"
+              },
+              {
+                "label": "客服登记 买家已申请退定金",
+                "value": "buyerRequestDepositRefundByService"
+              },
+              {
+                "label": "店小蜜登记 买家已申请退定金",
+                "value": "buyerRequestDepositRefundByDianxiaomi"
+              }
+            ]
+          },
+          "refund": {
+            "default": "ALL",
+            "x-decorator": "FormItem",
+            "x-component": "Select",
+            "x-decorator-props": {},
+            "id": "5",
+            "x-component-props": {},
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "售后服务",
+            "x-index": 2,
+            "enum": [
+              {
+                "label": "全部",
+                "value": "ALL"
+              },
+              {
+                "label": "买家投诉",
+                "value": "BUYER_SUIT"
+              },
+              {
+                "label": "我已投诉",
+                "value": "SELLER_SUIT"
+              },
+              {
+                "label": "退款中",
+                "value": "REFUNDING"
+              }
+            ]
+          },
+          "[payDateBegin,payDateEnd]": {
+            "x-decorator": "FormItem",
+            "x-component": "DateRangePicker",
+            "x-decorator-props": {},
+            "id": "12",
+            "x-component-props": {
+              "showTime": {
+                "format": "HH:mm:ss"
+              }
+            },
+            "x-validator": [],
+            "x-disabled": false,
+            "title": "付款时间",
+            "x-index": 7
+          }
+        }
+      },
+      "extra": {
+        "batchFlagUrl": "//trade.taobao.com/trade/memo/update_sell_memo.htm",
+        "batchFreePostUrl": "//trade.taobao.com/trade/freePostFee.htm",
+        "close_flag_visible": true,
+        "durexURI": "//aq.taobao.com/durex/validate",
+        "batchSendGoodsUrl": "//trade.taobao.com/trade/wuliuListScreen.htm",
+        "newOptions": true,
+        "isOldQnNewExport": true,
+        "needAuth": true,
+        "preRenderBatchSendGoods": true,
+        "tjbPriority": 0,
+        "newModifyFee": true,
+        "queryTitleMaxSize": 15,
+        "shipSupportVirtual": true,
+        "useExportPrepare": "true",
+        "durexReturnURI": "//trade.taobao.com/trade/itemlist/mid/durex.htm",
+        "exportSupportTypes": {
+          "1": [
+            "xlsx",
+            "csv"
+          ],
+          "2": [
+            "xlsx",
+            "csv"
+          ],
+          "3": [
+            "xlsx"
+          ]
+        },
+        "batchButtonListV2": "{\"outButtonList\":[{\"buttonText\":\"批量发货\",\"buttonType\":\"batchShipment\",\"params\":{\"url\":\"//trade.taobao.com/trade/wuliuListScreen.htm\",\"preRenderBatchSendGoods\":\"true\"}},{\"buttonText\":\"批量标记\",\"buttonType\":\"batchMark\",\"params\":{}},{\"buttonText\":\"批量免运费\",\"buttonType\":\"batchFreeShip\",\"params\":{\"url\":\"//trade.taobao.com/trade/freePostFee.htm\"}}],\"insideButtonList\":[{\"buttonText\":\"批量导入识别码\",\"buttonType\":\"batchImportSn\",\"params\":{}},{\"actionType\":\"jump\",\"buttonText\":\"去发优惠券\",\"domainTags\":[],\"params\":{\"jumpUrl\":\"https://qn.taobao.com/home.htm/coupon/create?couponType=0&tagId=1977850001\"},\"serviceTags\":[],\"styleType\":\"normal\"}]}",
+        "batchSendGoods": true,
+        "newSellerMemo": true,
+        "batchUploadBybtSn": true
+      },
+      "queryOption": {
+        "rateStatus": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "需我评价",
+            "value": "I_HAS_NOT_COMMENT"
+          },
+          {
+            "label": "我已评价",
+            "value": "I_HAS_COMMENT"
+          },
+          {
+            "label": "对方已评",
+            "value": "OTHER_HAS_COMMENT"
+          },
+          {
+            "label": "双方已评",
+            "value": "ALL_COMMENT"
+          }
+        ],
+        "bizType": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "机票订单",
+            "value": "1400"
+          },
+          {
+            "label": "数字订单",
+            "value": "1500"
+          },
+          {
+            "label": "理财订单",
+            "value": "3000"
+          },
+          {
+            "label": "网游订单",
+            "value": "900"
+          },
+          {
+            "label": "酒店订单",
+            "value": "710"
+          },
+          {
+            "label": "保险订单",
+            "value": "1102"
+          },
+          {
+            "label": "企采订单",
+            "value": "corpMarket"
+          },
+          {
+            "label": "租赁订单",
+            "value": "leaseMarket"
+          },
+          {
+            "label": "补差订单",
+            "value": "receipt"
+          },
+          {
+            "label": "1元预约",
+            "value": "tind1yyy"
+          },
+          {
+            "label": "预售下沉订单",
+            "value": "ysxc"
+          },
+          {
+            "label": "全款预订订单",
+            "value": "luxuryBooking"
+          },
+          {
+            "label": "试销订单",
+            "value": "newCommodity"
+          }
+        ],
+        "holdStatus": [
+          {
+            "label": "全部",
+            "value": 0
+          },
+          {
+            "label": "百补hold单",
+            "value": 1
+          }
+        ],
+        "sellerMemoFlag": [
+          {
+            "label": "全部",
+            "value": "0"
+          },
+          {
+            "label": "有备注",
+            "value": "1"
+          },
+          {
+            "label": "无备注",
+            "value": "2"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-0"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i4/O1CN015SWzPn1ZYOkHKAWft_!!6000000003206-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-1"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i1/O1CN01Fa6Umz1Ogg8KPBs7v_!!6000000001735-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-2"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i1/O1CN01k0ngrS1V1BYrUHZdq_!!6000000002592-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-3"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i1/O1CN017XjC2z1fqcC4n8bGZ_!!6000000004058-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-4"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i3/O1CN01cXPJrS1BzNIMCmPdu_!!6000000000016-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-5"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i4/O1CN01vyXd551Cl0UACTeUU_!!6000000000120-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-6"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i3/O1CN01jD2t3W1l7cz6AuOFs_!!6000000004772-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-7"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i2/O1CN01psQtR61F19gOdPL2a_!!6000000000426-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-8"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i2/O1CN01FhK38d1THYU6uQ4ky_!!6000000002357-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-9"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i4/O1CN01egzLwc1qlzyT9AvW9_!!6000000005537-2-tps-120-120.png?getAvatar=avatar",
+            "value": "F-10"
+          },
+          {
+            "label": "https://img.alicdn.com/imgextra/i2/O1CN019Vns2X1CykVI17vO6_!!6000000000150-2-tps-200-200.png",
+            "value": "F-11"
+          }
+        ],
+        "deliveryTimeType": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "已过发货时间",
+            "value": "deliveryHadTimeOut"
+          },
+          {
+            "label": "12小时内需要发货",
+            "value": "deliveryWillTimeOutTwelveHours"
+          },
+          {
+            "label": "今天内需要发货",
+            "value": "deliveryWillTimeOutToday"
+          },
+          {
+            "label": "三天内需要发货",
+            "value": "deliveryWillTimeOutThreeDay"
+          },
+          {
+            "label": "三天后需要发货",
+            "value": "deliveryWillTimeOutThreeDayAfter"
+          }
+        ],
+        "orderStatus": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "等待买家付款",
+            "value": "NOT_PAID"
+          },
+          {
+            "label": "订单确认中",
+            "value": "HOLD"
+          },
+          {
+            "label": "买家已付款",
+            "value": "PAID"
+          },
+          {
+            "label": "卖家已发货",
+            "value": "SEND"
+          },
+          {
+            "label": "交易成功",
+            "value": "SUCCESS"
+          },
+          {
+            "label": "交易关闭",
+            "value": "DROP"
+          },
+          {
+            "label": "待付款和待发货订单",
+            "value": "NOT_PAID_AND_NOT_SEND"
+          },
+          {
+            "label": "未完成的订单",
+            "value": "NOT_FINISHED"
+          },
+          {
+            "label": "退款中的订单",
+            "value": "REFUNDING"
+          },
+          {
+            "label": "定金已付",
+            "value": "FRONT_PAID"
+          },
+          {
+            "label": "异常订单",
+            "value": "EXCEPTIONAL"
+          }
+        ],
+        "aftersaleType": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "买家投诉",
+            "value": "BUYER_SUIT"
+          },
+          {
+            "label": "我已投诉",
+            "value": "SELLER_SUIT"
+          },
+          {
+            "label": "退款中",
+            "value": "REFUNDING"
+          }
+        ],
+        "notifySendGoodsList": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "买家催发货订单",
+            "value": "notifySendGoods"
+          }
+        ],
+        "sellerMemo": [
+          {
+            "label": "全部",
+            "value": "0"
+          },
+          {
+            "label": "有备注",
+            "value": "1"
+          },
+          {
+            "label": "无备注",
+            "value": "2"
+          }
+        ],
+        "logisticsType": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "货到付款",
+            "value": "COD"
+          },
+          {
+            "label": "卖家物流",
+            "value": "SELLER_PAYED"
+          },
+          {
+            "label": "选时达",
+            "value": "SELECT_TIME_DELIVERY"
+          }
+        ],
+        "preSaleTradeType": [
+          {
+            "label": "全部",
+            "value": "ALL"
+          },
+          {
+            "label": "预付款已付未确认",
+            "value": "waitConfirm"
+          },
+          {
+            "label": "已确认未付尾款",
+            "value": "waitPayWeikuan"
+          },
+          {
+            "label": "预售下沉成功",
+            "value": "xiachenSuccess"
+          },
+          {
+            "label": "预售下沉失败",
+            "value": "xiachenFailed"
+          },
+          {
+            "label": "已交接快递",
+            "value": "expressPassed"
+          },
+          {
+            "label": "客服登记 买家已申请退定金",
+            "value": "buyerRequestDepositRefundByService"
+          },
+          {
+            "label": "店小蜜登记 买家已申请退定金",
+            "value": "buyerRequestDepositRefundByDianxiaomi"
+          }
+        ],
+        "commonTradeType": [
+          {
+            "label": "所有类型",
+            "value": 0
+          },
+          {
+            "label": "一口价",
+            "value": 1
+          },
+          {
+            "label": "拍卖",
+            "value": 2
+          }
+        ]
+      },
+      "page": {
+        "totalNumber": 3,
+        "totalPage": 1,
+        "globalCodes": [],
+        "pageSize": 15,
+        "queryForTitle": false,
+        "currentPage": 1
+      },
+      "mainOrders": [
+        {
+          "operations": [
+            {
+              "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116422962298007632",
+              "style": "thead",
+              "id": "flag",
+              "text": "编辑标记信息，仅自己可见",
+              "type": "operation",
+              "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116422962298007632&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+            }
+          ],
+          "statusInfo": {
+            "operations": [
+              {
+                "style": "t16",
+                "text": "详情",
+                "params": {
+                  "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116422962298007632",
+                  "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+                },
+                "type": "operation",
+                "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+              },
+              {
+                "style": "t16",
+                "id": "onlinedelivery",
+                "text": "寄件",
+                "type": "operation",
+                "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116422962298007632"
+              },
+              {
+                "style": "t16",
+                "id": "printWaybill",
+                "text": "打单",
+                "type": "operation",
+                "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116422962298007632"
+              },
+              {
+                "style": "t3",
+                "text": "发货",
+                "type": "operation",
+                "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116422962298007632&bizType=200"
+              }
+            ],
+            "text": "买家已付款",
+            "type": "t1"
+          },
+          "extra": {
+            "sellerFlag": 0,
+            "currencySymbol": "￥",
+            "inHold": false,
+            "isShowSellerService": false,
+            "currency": "CNY",
+            "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+            "batchSendGoods": 0,
+            "disableCheckbox": false
+          },
+          "orderInfo": {
+            "createTime": "2026-05-20 09:29:45",
+            "id": "5116422962298007632"
+          },
+          "id": "5116422962298007632",
+          "subOrders": [
+            {
+              "idStr": "5116422962298007632",
+              "priceInfo": {
+                "realTotal": "0.01"
+              },
+              "quantity": "1",
+              "returnAddressVO": {
+                "historyShow": false
+              },
+              "id": 5116422962298007632,
+              "itemInfo": {
+                "skuText": [
+                  {
+                    "visible": "SOLID",
+                    "name": "客服服务时段",
+                    "value": "7×24小时"
+                  }
+                ],
+                "extra": [
+                  {
+                    "visible": "SOLID",
+                    "value": "当前订单无发货时间和发货倒计时信息"
+                  }
+                ],
+                "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+                "shipCountDownTime": "",
+                "title": "测试游戏类目",
+                "serviceIcons": [
+                  {
+                    "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                    "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                    "type": 3,
+                    "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+                  }
+                ],
+                "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116422962298007632&snapShot=true",
+                "skuId": 0,
+                "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+              }
+            }
+          ],
+          "payInfo": {
+            "postType": "(虚拟物品)",
+            "icons": [
+              {
+                "linkTitle": "该订单来自您的手机淘宝店铺",
+                "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+                "type": 3,
+                "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+              }
+            ],
+            "actualFee": "0.01"
+          },
+          "buyer": {
+            "nick": "f**",
+            "operations": [
+              {
+                "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+                "action": "a14",
+                "style": "t0",
+                "title": "查询该买家订单",
+                "type": "operation",
+                "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+              }
+            ],
+            "memberUrl": "",
+            "phoneNum": "150********",
+            "encodeNick": "f**",
+            "id": 0,
+            "guestUser": false,
+            "encodeId": "RAzN8HWKz2HR1am77BX7dBjic84q75v7Kj8vJVa6RSa6F6dNmKZ"
+          },
+          "presentOrder": false
+        },
+        {
+          "operations": [
+            {
+              "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116291202875019545",
+              "style": "thead",
+              "id": "flag",
+              "text": "编辑标记信息，仅自己可见",
+              "type": "operation",
+              "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116291202875019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+            }
+          ],
+          "statusInfo": {
+            "operations": [
+              {
+                "style": "t16",
+                "text": "详情",
+                "params": {
+                  "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116291202875019545",
+                  "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+                },
+                "type": "operation",
+                "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+              },
+              {
+                "style": "t16",
+                "id": "onlinedelivery",
+                "text": "寄件",
+                "type": "operation",
+                "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116291202875019545"
+              },
+              {
+                "style": "t16",
+                "id": "printWaybill",
+                "text": "打单",
+                "type": "operation",
+                "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116291202875019545"
+              },
+              {
+                "style": "t3",
+                "text": "发货",
+                "type": "operation",
+                "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116291202875019545&bizType=200"
+              }
+            ],
+            "text": "买家已付款",
+            "type": "t1"
+          },
+          "extra": {
+            "sellerFlag": 0,
+            "currencySymbol": "￥",
+            "inHold": false,
+            "isShowSellerService": false,
+            "currency": "CNY",
+            "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+            "batchSendGoods": 0,
+            "disableCheckbox": false
+          },
+          "orderInfo": {
+            "createTime": "2026-05-19 14:36:19",
+            "id": "5116291202875019545"
+          },
+          "id": "5116291202875019545",
+          "subOrders": [
+            {
+              "idStr": "5116291202875019545",
+              "priceInfo": {
+                "realTotal": "0.01"
+              },
+              "quantity": "1",
+              "returnAddressVO": {
+                "historyShow": false
+              },
+              "id": 5116291202875019545,
+              "itemInfo": {
+                "skuText": [
+                  {
+                    "visible": "SOLID",
+                    "name": "客服服务时段",
+                    "value": "7×24小时"
+                  }
+                ],
+                "extra": [
+                  {
+                    "visible": "SOLID",
+                    "value": "当前订单无发货时间和发货倒计时信息"
+                  }
+                ],
+                "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+                "shipCountDownTime": "",
+                "title": "测试游戏类目",
+                "serviceIcons": [
+                  {
+                    "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                    "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                    "type": 3,
+                    "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+                  }
+                ],
+                "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116291202875019545&snapShot=true",
+                "skuId": 0,
+                "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+              }
+            }
+          ],
+          "payInfo": {
+            "postType": "(虚拟物品)",
+            "icons": [
+              {
+                "linkTitle": "该订单来自您的手机淘宝店铺",
+                "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+                "type": 3,
+                "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+              }
+            ],
+            "actualFee": "0.01"
+          },
+          "buyer": {
+            "nick": "爱**",
+            "operations": [
+              {
+                "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+                "action": "a14",
+                "style": "t0",
+                "title": "查询该买家订单",
+                "type": "operation",
+                "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+              }
+            ],
+            "memberUrl": "",
+            "phoneNum": "152********",
+            "encodeNick": "爱**",
+            "id": 0,
+            "guestUser": false,
+            "encodeId": "RAzN8HWLKDv5z3c1VZHmAEsWUfWwdXCnwcUwC6E7s6PeQFpqCSm"
+          },
+          "presentOrder": false
+        },
+        {
+          "operations": [
+            {
+              "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116280942197019545",
+              "style": "thead",
+              "id": "flag",
+              "text": "编辑标记信息，仅自己可见",
+              "type": "operation",
+              "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116280942197019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+            }
+          ],
+          "statusInfo": {
+            "operations": [
+              {
+                "style": "t16",
+                "text": "详情",
+                "params": {
+                  "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116280942197019545",
+                  "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+                },
+                "type": "operation",
+                "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+              },
+              {
+                "style": "t16",
+                "id": "onlinedelivery",
+                "text": "寄件",
+                "type": "operation",
+                "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116280942197019545"
+              },
+              {
+                "style": "t16",
+                "id": "printWaybill",
+                "text": "打单",
+                "type": "operation",
+                "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116280942197019545"
+              },
+              {
+                "style": "t3",
+                "text": "发货",
+                "type": "operation",
+                "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116280942197019545&bizType=200"
+              }
+            ],
+            "text": "买家已付款",
+            "type": "t1"
+          },
+          "extra": {
+            "sellerFlag": 0,
+            "currencySymbol": "￥",
+            "inHold": false,
+            "isShowSellerService": false,
+            "currency": "CNY",
+            "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+            "batchSendGoods": 0,
+            "disableCheckbox": false
+          },
+          "orderInfo": {
+            "createTime": "2026-05-19 13:12:32",
+            "id": "5116280942197019545"
+          },
+          "id": "5116280942197019545",
+          "subOrders": [
+            {
+              "idStr": "5116280942197019545",
+              "priceInfo": {
+                "realTotal": "0.01"
+              },
+              "quantity": "1",
+              "returnAddressVO": {
+                "historyShow": false
+              },
+              "id": 5116280942197019545,
+              "itemInfo": {
+                "skuText": [
+                  {
+                    "visible": "SOLID",
+                    "name": "客服服务时段",
+                    "value": "7×24小时"
+                  }
+                ],
+                "extra": [
+                  {
+                    "visible": "SOLID",
+                    "value": "当前订单无发货时间和发货倒计时信息"
+                  }
+                ],
+                "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+                "shipCountDownTime": "",
+                "title": "测试游戏类目",
+                "serviceIcons": [
+                  {
+                    "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                    "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                    "type": 3,
+                    "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+                  }
+                ],
+                "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116280942197019545&snapShot=true",
+                "skuId": 0,
+                "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+              }
+            }
+          ],
+          "payInfo": {
+            "postType": "(虚拟物品)",
+            "icons": [
+              {
+                "linkTitle": "该订单来自您的手机淘宝店铺",
+                "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+                "type": 3,
+                "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+              }
+            ],
+            "actualFee": "0.01"
+          },
+          "buyer": {
+            "nick": "爱**",
+            "operations": [
+              {
+                "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+                "action": "a14",
+                "style": "t0",
+                "title": "查询该买家订单",
+                "type": "operation",
+                "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+              }
+            ],
+            "memberUrl": "",
+            "phoneNum": "152********",
+            "encodeNick": "爱**",
+            "id": 0,
+            "guestUser": false,
+            "encodeId": "RAzN8HWLKDv5z3c1VZHmAEsWUfWwdXCnwcUwC6E7s6PeQFpqCSm"
+          },
+          "presentOrder": false
+        }
+      ]
+    },
+    {
+      "operations": [
+        {
+          "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116422962298007632",
+          "style": "thead",
+          "id": "flag",
+          "text": "编辑标记信息，仅自己可见",
+          "type": "operation",
+          "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116422962298007632&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+        }
+      ],
+      "statusInfo": {
+        "operations": [
+          {
+            "style": "t16",
+            "text": "详情",
+            "params": {
+              "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116422962298007632",
+              "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+            },
+            "type": "operation",
+            "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+          },
+          {
+            "style": "t16",
+            "id": "onlinedelivery",
+            "text": "寄件",
+            "type": "operation",
+            "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116422962298007632"
+          },
+          {
+            "style": "t16",
+            "id": "printWaybill",
+            "text": "打单",
+            "type": "operation",
+            "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116422962298007632"
+          },
+          {
+            "style": "t3",
+            "text": "发货",
+            "type": "operation",
+            "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116422962298007632&bizType=200"
+          }
+        ],
+        "text": "买家已付款",
+        "type": "t1"
+      },
+      "extra": {
+        "sellerFlag": 0,
+        "currencySymbol": "￥",
+        "inHold": false,
+        "isShowSellerService": false,
+        "currency": "CNY",
+        "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+        "batchSendGoods": 0,
+        "disableCheckbox": false
+      },
+      "orderInfo": {
+        "createTime": "2026-05-20 09:29:45",
+        "id": "5116422962298007632"
+      },
+      "id": "5116422962298007632",
+      "subOrders": [
+        {
+          "idStr": "5116422962298007632",
+          "priceInfo": {
+            "realTotal": "0.01"
+          },
+          "quantity": "1",
+          "returnAddressVO": {
+            "historyShow": false
+          },
+          "id": 5116422962298007632,
+          "itemInfo": {
+            "skuText": [
+              {
+                "visible": "SOLID",
+                "name": "客服服务时段",
+                "value": "7×24小时"
+              }
+            ],
+            "extra": [
+              {
+                "visible": "SOLID",
+                "value": "当前订单无发货时间和发货倒计时信息"
+              }
+            ],
+            "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+            "shipCountDownTime": "",
+            "title": "测试游戏类目",
+            "serviceIcons": [
+              {
+                "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                "type": 3,
+                "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+              }
+            ],
+            "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116422962298007632&snapShot=true",
+            "skuId": 0,
+            "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+          }
+        }
+      ],
+      "payInfo": {
+        "postType": "(虚拟物品)",
+        "icons": [
+          {
+            "linkTitle": "该订单来自您的手机淘宝店铺",
+            "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+            "type": 3,
+            "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+          }
+        ],
+        "actualFee": "0.01"
+      },
+      "buyer": {
+        "nick": "f**",
+        "operations": [
+          {
+            "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+            "action": "a14",
+            "style": "t0",
+            "title": "查询该买家订单",
+            "type": "operation",
+            "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+          }
+        ],
+        "memberUrl": "",
+        "phoneNum": "150********",
+        "encodeNick": "f**",
+        "id": 0,
+        "guestUser": false,
+        "encodeId": "RAzN8HWKz2HR1am77BX7dBjic84q75v7Kj8vJVa6RSa6F6dNmKZ"
+      },
+      "presentOrder": false
+    },
+    {
+      "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116422962298007632",
+      "style": "thead",
+      "id": "flag",
+      "text": "编辑标记信息，仅自己可见",
+      "type": "operation",
+      "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116422962298007632&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+    },
+    {
+      "operations": [
+        {
+          "style": "t16",
+          "text": "详情",
+          "params": {
+            "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116422962298007632",
+            "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+          },
+          "type": "operation",
+          "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+        },
+        {
+          "style": "t16",
+          "id": "onlinedelivery",
+          "text": "寄件",
+          "type": "operation",
+          "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116422962298007632"
+        },
+        {
+          "style": "t16",
+          "id": "printWaybill",
+          "text": "打单",
+          "type": "operation",
+          "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116422962298007632"
+        },
+        {
+          "style": "t3",
+          "text": "发货",
+          "type": "operation",
+          "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116422962298007632&bizType=200"
+        }
+      ],
+      "text": "买家已付款",
+      "type": "t1"
+    },
+    {
+      "style": "t16",
+      "text": "详情",
+      "params": {
+        "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116422962298007632",
+        "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+      },
+      "type": "operation",
+      "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+    },
+    {
+      "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116422962298007632",
+      "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116422962298007632"
+    },
+    {
+      "style": "t16",
+      "id": "printWaybill",
+      "text": "打单",
+      "type": "operation",
+      "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116422962298007632"
+    },
+    {
+      "style": "t3",
+      "text": "发货",
+      "type": "operation",
+      "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116422962298007632&bizType=200"
+    },
+    {
+      "idStr": "5116422962298007632",
+      "priceInfo": {
+        "realTotal": "0.01"
+      },
+      "quantity": "1",
+      "returnAddressVO": {
+        "historyShow": false
+      },
+      "id": 5116422962298007632,
+      "itemInfo": {
+        "skuText": [
+          {
+            "visible": "SOLID",
+            "name": "客服服务时段",
+            "value": "7×24小时"
+          }
+        ],
+        "extra": [
+          {
+            "visible": "SOLID",
+            "value": "当前订单无发货时间和发货倒计时信息"
+          }
+        ],
+        "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+        "shipCountDownTime": "",
+        "title": "测试游戏类目",
+        "serviceIcons": [
+          {
+            "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+            "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+            "type": 3,
+            "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+          }
+        ],
+        "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116422962298007632&snapShot=true",
+        "skuId": 0,
+        "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+      }
+    },
+    {
+      "skuText": [
+        {
+          "visible": "SOLID",
+          "name": "客服服务时段",
+          "value": "7×24小时"
+        }
+      ],
+      "extra": [
+        {
+          "visible": "SOLID",
+          "value": "当前订单无发货时间和发货倒计时信息"
+        }
+      ],
+      "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+      "shipCountDownTime": "",
+      "title": "测试游戏类目",
+      "serviceIcons": [
+        {
+          "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+          "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+          "type": 3,
+          "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+        }
+      ],
+      "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116422962298007632&snapShot=true",
+      "skuId": 0,
+      "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+    },
+    {
+      "operations": [
+        {
+          "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116291202875019545",
+          "style": "thead",
+          "id": "flag",
+          "text": "编辑标记信息，仅自己可见",
+          "type": "operation",
+          "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116291202875019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+        }
+      ],
+      "statusInfo": {
+        "operations": [
+          {
+            "style": "t16",
+            "text": "详情",
+            "params": {
+              "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116291202875019545",
+              "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+            },
+            "type": "operation",
+            "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+          },
+          {
+            "style": "t16",
+            "id": "onlinedelivery",
+            "text": "寄件",
+            "type": "operation",
+            "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116291202875019545"
+          },
+          {
+            "style": "t16",
+            "id": "printWaybill",
+            "text": "打单",
+            "type": "operation",
+            "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116291202875019545"
+          },
+          {
+            "style": "t3",
+            "text": "发货",
+            "type": "operation",
+            "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116291202875019545&bizType=200"
+          }
+        ],
+        "text": "买家已付款",
+        "type": "t1"
+      },
+      "extra": {
+        "sellerFlag": 0,
+        "currencySymbol": "￥",
+        "inHold": false,
+        "isShowSellerService": false,
+        "currency": "CNY",
+        "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+        "batchSendGoods": 0,
+        "disableCheckbox": false
+      },
+      "orderInfo": {
+        "createTime": "2026-05-19 14:36:19",
+        "id": "5116291202875019545"
+      },
+      "id": "5116291202875019545",
+      "subOrders": [
+        {
+          "idStr": "5116291202875019545",
+          "priceInfo": {
+            "realTotal": "0.01"
+          },
+          "quantity": "1",
+          "returnAddressVO": {
+            "historyShow": false
+          },
+          "id": 5116291202875019545,
+          "itemInfo": {
+            "skuText": [
+              {
+                "visible": "SOLID",
+                "name": "客服服务时段",
+                "value": "7×24小时"
+              }
+            ],
+            "extra": [
+              {
+                "visible": "SOLID",
+                "value": "当前订单无发货时间和发货倒计时信息"
+              }
+            ],
+            "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+            "shipCountDownTime": "",
+            "title": "测试游戏类目",
+            "serviceIcons": [
+              {
+                "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                "type": 3,
+                "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+              }
+            ],
+            "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116291202875019545&snapShot=true",
+            "skuId": 0,
+            "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+          }
+        }
+      ],
+      "payInfo": {
+        "postType": "(虚拟物品)",
+        "icons": [
+          {
+            "linkTitle": "该订单来自您的手机淘宝店铺",
+            "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+            "type": 3,
+            "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+          }
+        ],
+        "actualFee": "0.01"
+      },
+      "buyer": {
+        "nick": "爱**",
+        "operations": [
+          {
+            "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+            "action": "a14",
+            "style": "t0",
+            "title": "查询该买家订单",
+            "type": "operation",
+            "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+          }
+        ],
+        "memberUrl": "",
+        "phoneNum": "152********",
+        "encodeNick": "爱**",
+        "id": 0,
+        "guestUser": false,
+        "encodeId": "RAzN8HWLKDv5z3c1VZHmAEsWUfWwdXCnwcUwC6E7s6PeQFpqCSm"
+      },
+      "presentOrder": false
+    },
+    {
+      "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116291202875019545",
+      "style": "thead",
+      "id": "flag",
+      "text": "编辑标记信息，仅自己可见",
+      "type": "operation",
+      "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116291202875019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+    },
+    {
+      "operations": [
+        {
+          "style": "t16",
+          "text": "详情",
+          "params": {
+            "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116291202875019545",
+            "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+          },
+          "type": "operation",
+          "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+        },
+        {
+          "style": "t16",
+          "id": "onlinedelivery",
+          "text": "寄件",
+          "type": "operation",
+          "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116291202875019545"
+        },
+        {
+          "style": "t16",
+          "id": "printWaybill",
+          "text": "打单",
+          "type": "operation",
+          "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116291202875019545"
+        },
+        {
+          "style": "t3",
+          "text": "发货",
+          "type": "operation",
+          "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116291202875019545&bizType=200"
+        }
+      ],
+      "text": "买家已付款",
+      "type": "t1"
+    },
+    {
+      "style": "t16",
+      "text": "详情",
+      "params": {
+        "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116291202875019545",
+        "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+      },
+      "type": "operation",
+      "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+    },
+    {
+      "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116291202875019545",
+      "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116291202875019545"
+    },
+    {
+      "style": "t16",
+      "id": "printWaybill",
+      "text": "打单",
+      "type": "operation",
+      "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116291202875019545"
+    },
+    {
+      "style": "t3",
+      "text": "发货",
+      "type": "operation",
+      "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116291202875019545&bizType=200"
+    },
+    {
+      "idStr": "5116291202875019545",
+      "priceInfo": {
+        "realTotal": "0.01"
+      },
+      "quantity": "1",
+      "returnAddressVO": {
+        "historyShow": false
+      },
+      "id": 5116291202875019545,
+      "itemInfo": {
+        "skuText": [
+          {
+            "visible": "SOLID",
+            "name": "客服服务时段",
+            "value": "7×24小时"
+          }
+        ],
+        "extra": [
+          {
+            "visible": "SOLID",
+            "value": "当前订单无发货时间和发货倒计时信息"
+          }
+        ],
+        "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+        "shipCountDownTime": "",
+        "title": "测试游戏类目",
+        "serviceIcons": [
+          {
+            "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+            "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+            "type": 3,
+            "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+          }
+        ],
+        "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116291202875019545&snapShot=true",
+        "skuId": 0,
+        "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+      }
+    },
+    {
+      "skuText": [
+        {
+          "visible": "SOLID",
+          "name": "客服服务时段",
+          "value": "7×24小时"
+        }
+      ],
+      "extra": [
+        {
+          "visible": "SOLID",
+          "value": "当前订单无发货时间和发货倒计时信息"
+        }
+      ],
+      "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+      "shipCountDownTime": "",
+      "title": "测试游戏类目",
+      "serviceIcons": [
+        {
+          "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+          "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+          "type": 3,
+          "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+        }
+      ],
+      "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116291202875019545&snapShot=true",
+      "skuId": 0,
+      "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+    },
+    {
+      "operations": [
+        {
+          "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116280942197019545",
+          "style": "thead",
+          "id": "flag",
+          "text": "编辑标记信息，仅自己可见",
+          "type": "operation",
+          "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116280942197019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+        }
+      ],
+      "statusInfo": {
+        "operations": [
+          {
+            "style": "t16",
+            "text": "详情",
+            "params": {
+              "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116280942197019545",
+              "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+            },
+            "type": "operation",
+            "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+          },
+          {
+            "style": "t16",
+            "id": "onlinedelivery",
+            "text": "寄件",
+            "type": "operation",
+            "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116280942197019545"
+          },
+          {
+            "style": "t16",
+            "id": "printWaybill",
+            "text": "打单",
+            "type": "operation",
+            "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116280942197019545"
+          },
+          {
+            "style": "t3",
+            "text": "发货",
+            "type": "operation",
+            "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116280942197019545&bizType=200"
+          }
+        ],
+        "text": "买家已付款",
+        "type": "t1"
+      },
+      "extra": {
+        "sellerFlag": 0,
+        "currencySymbol": "￥",
+        "inHold": false,
+        "isShowSellerService": false,
+        "currency": "CNY",
+        "sellerFlagPic": "https://img.alicdn.com/imgextra/i2/O1CN01k51piZ1htTu279fNe_!!6000000004335-2-tps-120-120.png?getAvatar=avatar",
+        "batchSendGoods": 0,
+        "disableCheckbox": false
+      },
+      "orderInfo": {
+        "createTime": "2026-05-19 13:12:32",
+        "id": "5116280942197019545"
+      },
+      "id": "5116280942197019545",
+      "subOrders": [
+        {
+          "idStr": "5116280942197019545",
+          "priceInfo": {
+            "realTotal": "0.01"
+          },
+          "quantity": "1",
+          "returnAddressVO": {
+            "historyShow": false
+          },
+          "id": 5116280942197019545,
+          "itemInfo": {
+            "skuText": [
+              {
+                "visible": "SOLID",
+                "name": "客服服务时段",
+                "value": "7×24小时"
+              }
+            ],
+            "extra": [
+              {
+                "visible": "SOLID",
+                "value": "当前订单无发货时间和发货倒计时信息"
+              }
+            ],
+            "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+            "shipCountDownTime": "",
+            "title": "测试游戏类目",
+            "serviceIcons": [
+              {
+                "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+                "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+                "type": 3,
+                "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+              }
+            ],
+            "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116280942197019545&snapShot=true",
+            "skuId": 0,
+            "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+          }
+        }
+      ],
+      "payInfo": {
+        "postType": "(虚拟物品)",
+        "icons": [
+          {
+            "linkTitle": "该订单来自您的手机淘宝店铺",
+            "linkUrl": "http://www.taobao.com/go/act/integrated/maijia-index.php?sprefer=symj27",
+            "type": 3,
+            "url": "//img.alicdn.com/tps/i1/T1xRBqXdNAXXXXXXXX-46-16.png"
+          }
+        ],
+        "actualFee": "0.01"
+      },
+      "buyer": {
+        "nick": "爱**",
+        "operations": [
+          {
+            "imgUrl": "//gtd.alicdn.com/tps/i8/T1KNtuXc4rXXXXXXXX-12-12.png",
+            "action": "a14",
+            "style": "t0",
+            "title": "查询该买家订单",
+            "type": "operation",
+            "url": "/trade/itemlist/list_sold_items.htm?action=itemlist/SoldQueryAction&event_submit_do_query=1"
+          }
+        ],
+        "memberUrl": "",
+        "phoneNum": "152********",
+        "encodeNick": "爱**",
+        "id": 0,
+        "guestUser": false,
+        "encodeId": "RAzN8HWLKDv5z3c1VZHmAEsWUfWwdXCnwcUwC6E7s6PeQFpqCSm"
+      },
+      "presentOrder": false
+    },
+    {
+      "dataUrl": "/trade/json/memoInfo.htm?user_type=seller&_input_charset=utf-8&orderid=5116280942197019545",
+      "style": "thead",
+      "id": "flag",
+      "text": "编辑标记信息，仅自己可见",
+      "type": "operation",
+      "url": "/trade/memo/update_sell_memo.htm?seller_id=2218242663556&biz_order_id=5116280942197019545&user_type=1&pageNum=1&auctionTitle=null&dateBegin=0&dateEnd=0&commentStatus=&buyerNick=&auctionStatus=&logisticsService="
+    },
+    {
+      "operations": [
+        {
+          "style": "t16",
+          "text": "详情",
+          "params": {
+            "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116280942197019545",
+            "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+          },
+          "type": "operation",
+          "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+        },
+        {
+          "style": "t16",
+          "id": "onlinedelivery",
+          "text": "寄件",
+          "type": "operation",
+          "url": "https://myseller.taobao.com/home.htm/qn-ship/wait?ORDER_ID=5116280942197019545"
+        },
+        {
+          "style": "t16",
+          "id": "printWaybill",
+          "text": "打单",
+          "type": "operation",
+          "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116280942197019545"
+        },
+        {
+          "style": "t3",
+          "text": "发货",
+          "type": "operation",
+          "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116280942197019545&bizType=200"
+        }
+      ],
+      "text": "买家已付款",
+      "type": "t1"
+    },
+    {
+      "style": "t16",
+      "text": "详情",
+      "params": {
+        "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116280942197019545",
+        "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+      },
+      "type": "operation",
+      "url": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+    },
+    {
+      "qianNiuPCDetailUrl": "//qn.taobao.com/home.htm/trade-platform/tp/detail?bizOrderId=5116280942197019545",
+      "solutionPCDetailUrl": "//trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=5116280942197019545"
+    },
+    {
+      "style": "t16",
+      "id": "printWaybill",
+      "text": "打单",
+      "type": "operation",
+      "url": "https://myseller.taobao.com/home.htm/qn-order/unshipped?from_channel=trade&ORDER_ID=5116280942197019545"
+    },
+    {
+      "style": "t3",
+      "text": "发货",
+      "type": "operation",
+      "url": "//trade.taobao.com/trade/logistics_status.htm?logisType=1&bizOrderId=5116280942197019545&bizType=200"
+    },
+    {
+      "idStr": "5116280942197019545",
+      "priceInfo": {
+        "realTotal": "0.01"
+      },
+      "quantity": "1",
+      "returnAddressVO": {
+        "historyShow": false
+      },
+      "id": 5116280942197019545,
+      "itemInfo": {
+        "skuText": [
+          {
+            "visible": "SOLID",
+            "name": "客服服务时段",
+            "value": "7×24小时"
+          }
+        ],
+        "extra": [
+          {
+            "visible": "SOLID",
+            "value": "当前订单无发货时间和发货倒计时信息"
+          }
+        ],
+        "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+        "shipCountDownTime": "",
+        "title": "测试游戏类目",
+        "serviceIcons": [
+          {
+            "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+            "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+            "type": 3,
+            "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+          }
+        ],
+        "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116280942197019545&snapShot=true",
+        "skuId": 0,
+        "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+      }
+    },
+    {
+      "skuText": [
+        {
+          "visible": "SOLID",
+          "name": "客服服务时段",
+          "value": "7×24小时"
+        }
+      ],
+      "extra": [
+        {
+          "visible": "SOLID",
+          "value": "当前订单无发货时间和发货倒计时信息"
+        }
+      ],
+      "pic": "//img.alicdn.com/imgextra/i4/2218242663556/O1CN01kwByxv1c8hPQjXVFx_!!2218242663556.jpg_sum.jpg",
+      "shipCountDownTime": "",
+      "title": "测试游戏类目",
+      "serviceIcons": [
+        {
+          "linkTitle": "消费者保障服务，卖家承诺商品如实描述",
+          "linkUrl": "http://www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&am_id=130011830696bce9eda3&cm_id=&pm_id=",
+          "type": 3,
+          "url": "//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
+        }
+      ],
+      "itemUrl": "//trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=5116280942197019545&snapShot=true",
+      "skuId": 0,
+      "tips": "预约配送、区域零售、天猫时效表达订单（如：当日发、次日达、预售极速达等）、修改过地址的订单目前暂不支持展示发货时间和发货倒计时。"
+    }
+  ]
+}

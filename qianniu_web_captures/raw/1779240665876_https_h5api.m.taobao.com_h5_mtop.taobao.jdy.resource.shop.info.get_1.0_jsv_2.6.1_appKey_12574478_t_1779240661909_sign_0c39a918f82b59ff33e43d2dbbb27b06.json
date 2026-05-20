@@ -1,0 +1,30 @@
+{
+  "captured_at": "2026-05-20 09:31:05",
+  "url": "https://h5api.m.taobao.com/h5/mtop.taobao.jdy.resource.shop.info.get/1.0/?jsv=2.6.1&appKey=12574478&t=1779240661909&sign=0c39a918f82b59ff33e43d2dbbb27b06&ttid=11320%40taobao_WEB_9.9.99&v=1.0&type=originaljsonp&timeout=20000&dataType=originaljsonp&api=mtop.taobao.jdy.resource.shop.info.get&callback=mtopjsonp3&data=%7B%7D",
+  "method": "GET",
+  "request": {
+    "params": {
+      "jsv": "2.6.1",
+      "appKey": "12574478",
+      "t": "1779240661909",
+      "sign": "0c39a918f82b59ff33e43d2dbbb27b06",
+      "ttid": "11320@taobao_WEB_9.9.99",
+      "v": "1.0",
+      "type": "originaljsonp",
+      "timeout": "20000",
+      "dataType": "originaljsonp",
+      "api": "mtop.taobao.jdy.resource.shop.info.get",
+      "callback": "mtopjsonp3",
+      "data": "{}"
+    },
+    "postData": false
+  },
+  "response": {
+    "text": " mtopjsonp3({\"api\":\"mtop.taobao.jdy.resource.shop.info.get\",\"data\":{\"result\":{\"approvalStatus\":0,\"avatar\":\"https://img.alicdn.com/imgextra/i1/O1CN01pz5irY1bhDKceJor2_!!6000000003496-2-tps-144-144.png\",\"cas\":\"0.0\",\"cg\":\"0.0\",\"csia\":\"0.0\",\"displayNick\":\"tb263898874094\",\"displayShopStatus\":\"正常\",\"extModule\":[],\"extraAction\":{\"actionUrl\":\"\",\"tmallActionUrl\":\"\",\"actionName\":\"\"},\"fullAvatar\":\"https://img.alicdn.com/imgextra/i1/O1CN01pz5irY1bhDKceJor2_!!6000000003496-2-tps-144-144.png\",\"hitVipSeller\":false,\"isMainAccount\":true,\"lastStarts\":1720800815000,\"layer\":\"UNKNOWN\",\"level\":1032,\"mainCategory\":\"游戏服务\",\"mas\":\"0.0\",\"mg\":\"0.0\",\"msia\":\"0.0\",\"nick\":\"tb263898874094\",\"saleOff\":false,\"sas\":\"0.0\",\"sg\":\"0.0\",\"shopDomainUrl\":\"djku4d5gwjcz6yilriuq4g4jyzro98h.taobao.com\",\"shopId\":268671330,\"shopLayerUrl\":\"https://qn.taobao.com/home.html/seller-growth-center?from=qn_pc_homepage\",\"shopName\":\"tb263898874094的小店59\",\"shopRankInfo\":{\"rankNum\":3,\"rankType\":2,\"rankUrl\":\"//gtms04.alicdn.com/tps/i4/TB1VvMcHpXXXXXsXXXX3e.oIVXX-78-24.png\",\"sellerType\":1},\"shopStatus\":\"zero_order\",\"ssia\":\"0.0\",\"sub\":false,\"tbSeller\":true,\"tbSellerNps\":{\"dateId\":\"20260519\",\"goodsValueTag\":0,\"logisticsValueTag\":0,\"npsValueDesc\":\"有效订单量不足30单，暂无真实体验分，请提升成交量\",\"npsValueDescMobileUrl\":\"https://m.duanqu.com?_ariver_appid=3000000103174051&_mp_code=tb&transition=present\",\"npsValueDescPcUrl\":\"https://qn.taobao.com/home.htm/voc/newTask/serverReport\",\"npsValueDescUpgrade\":\"[{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"有效订单量不足\\\" },{\\\"type\\\": \\\"text\\\",\\\"text\\\": \\\"30单\\\",\\\"style\\\": {\\\"textColor\\\": \\\"#FF0000\\\"}},{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"，暂无真实体验分，请提升成交量\\\"}]\",\"serviceValueTag\":0,\"title\":\"真实体验分\"},\"tmallSeller\":false,\"welcomeText\":\"1\"}},\"ret\":[\"SUCCESS::调用成功\"],\"v\":\"1.0\"})"
+  },
+  "records": [
+    {
+      "text": " mtopjsonp3({\"api\":\"mtop.taobao.jdy.resource.shop.info.get\",\"data\":{\"result\":{\"approvalStatus\":0,\"avatar\":\"https://img.alicdn.com/imgextra/i1/O1CN01pz5irY1bhDKceJor2_!!6000000003496-2-tps-144-144.png\",\"cas\":\"0.0\",\"cg\":\"0.0\",\"csia\":\"0.0\",\"displayNick\":\"tb263898874094\",\"displayShopStatus\":\"正常\",\"extModule\":[],\"extraAction\":{\"actionUrl\":\"\",\"tmallActionUrl\":\"\",\"actionName\":\"\"},\"fullAvatar\":\"https://img.alicdn.com/imgextra/i1/O1CN01pz5irY1bhDKceJor2_!!6000000003496-2-tps-144-144.png\",\"hitVipSeller\":false,\"isMainAccount\":true,\"lastStarts\":1720800815000,\"layer\":\"UNKNOWN\",\"level\":1032,\"mainCategory\":\"游戏服务\",\"mas\":\"0.0\",\"mg\":\"0.0\",\"msia\":\"0.0\",\"nick\":\"tb263898874094\",\"saleOff\":false,\"sas\":\"0.0\",\"sg\":\"0.0\",\"shopDomainUrl\":\"djku4d5gwjcz6yilriuq4g4jyzro98h.taobao.com\",\"shopId\":268671330,\"shopLayerUrl\":\"https://qn.taobao.com/home.html/seller-growth-center?from=qn_pc_homepage\",\"shopName\":\"tb263898874094的小店59\",\"shopRankInfo\":{\"rankNum\":3,\"rankType\":2,\"rankUrl\":\"//gtms04.alicdn.com/tps/i4/TB1VvMcHpXXXXXsXXXX3e.oIVXX-78-24.png\",\"sellerType\":1},\"shopStatus\":\"zero_order\",\"ssia\":\"0.0\",\"sub\":false,\"tbSeller\":true,\"tbSellerNps\":{\"dateId\":\"20260519\",\"goodsValueTag\":0,\"logisticsValueTag\":0,\"npsValueDesc\":\"有效订单量不足30单，暂无真实体验分，请提升成交量\",\"npsValueDescMobileUrl\":\"https://m.duanqu.com?_ariver_appid=3000000103174051&_mp_code=tb&transition=present\",\"npsValueDescPcUrl\":\"https://qn.taobao.com/home.htm/voc/newTask/serverReport\",\"npsValueDescUpgrade\":\"[{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"有效订单量不足\\\" },{\\\"type\\\": \\\"text\\\",\\\"text\\\": \\\"30单\\\",\\\"style\\\": {\\\"textColor\\\": \\\"#FF0000\\\"}},{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"，暂无真实体验分，请提升成交量\\\"}]\",\"serviceValueTag\":0,\"title\":\"真实体验分\"},\"tmallSeller\":false,\"welcomeText\":\"1\"}},\"ret\":[\"SUCCESS::调用成功\"],\"v\":\"1.0\"})"
+    }
+  ]
+}
