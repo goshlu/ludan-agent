@@ -34,6 +34,8 @@ RIGHT_ORDERS_FALLBACK_POINTS = (
     {"x": 0.89, "y": 0.55},
 )
 
+CHAT_INPUT_POINT = {"x": 0.42, "y": 0.86}
+
 
 ORDER_ID_PATTERNS = [
     re.compile(r"(?:订单编号|订单号)\s*[:：]?\s*([0-9]{10,30}(?:/[0-9]{10,30})*)"),
@@ -192,10 +194,26 @@ def focus_chat_input_by_hotkey():
 
 def paste_text_to_focused_input(text):
     pyperclip.copy(text)
-    time.sleep(0.18)
-    send_hotkey("^v")
     time.sleep(0.25)
+    release_keyboard_modifiers()
+    time.sleep(0.05)
+    keyboard.send("ctrl+v", do_press=True, do_release=True)
+    time.sleep(0.35)
     pyperclip.copy(text)
+
+
+def chat_input_contains_text(text):
+    marker = f"__QIANNIU_PASTE_VERIFY_{uuid.uuid4()}__"
+    pyperclip.copy(marker)
+    time.sleep(0.05)
+    send_hotkey("^a")
+    time.sleep(0.05)
+    send_hotkey("^c")
+    copied = wait_for_clipboard_change(marker, timeout=0.35, interval=0.03)
+    pyperclip.copy(text)
+    if copied == marker:
+        return False
+    return text.strip() in normalize_text(copied)
 
 
 def paste_to_chat_input_by_hotkey(text):
@@ -206,12 +224,22 @@ def paste_to_chat_input_by_hotkey(text):
 
 
 def paste_to_chat_input(text):
-    if pyautogui is None:
-        pyperclip.copy(text)
+    pyperclip.copy(text)
+    time.sleep(0.15)
+
+    window_rect = get_qianniu_window_rect()
+    if pyautogui is None or not window_rect:
         print("模板已复制到剪贴板，但没有找到千牛窗口，无法自动粘贴。")
         return False
 
-    return paste_to_chat_input_by_hotkey(text)
+    x = int(window_rect["left"] + window_rect["width"] * CHAT_INPUT_POINT["x"])
+    y = int(window_rect["top"] + window_rect["height"] * CHAT_INPUT_POINT["y"])
+    pyautogui.click(x, y)
+    time.sleep(0.2)
+    keyboard.press_and_release("ctrl+v")
+    time.sleep(0.2)
+    pyperclip.copy(text)
+    return True
 
 
 def normalize_text(text):
@@ -635,14 +663,27 @@ def copy_visible_quick_copy_orders_info():
                 scroll_boost = 1
             continue
 
+        if (
+            scan_index > 0
+            and expected_count
+            and len(order_items) == 1
+            and len(buttons) == 1
+            and len(order_items) < expected_count
+        ):
+            print("下滑后只看到 1 个快捷复制按钮，判断为上一单残留，先跳过并继续大幅下滑。")
+            scroll_boost = 4
+            continue
+
         if expected_count and len(order_items) >= expected_count:
             print(f"已拿到 {len(order_items)}/{expected_count} 个订单，停止继续查找。")
             break
 
         print(f"{scan_name}找到 {len(buttons)} 个新的快捷复制按钮。")
         new_order_added_in_scan = False
+        new_order_count_in_scan = 0
         duplicate_count_in_scan = 0
         current_scan_last_id = None
+        should_leave_current_scan = False
 
         for button in buttons:
             if expected_count and len(order_items) >= expected_count:
@@ -654,7 +695,6 @@ def copy_visible_quick_copy_orders_info():
             if not text.strip():
                 continue
 
-            copied_texts.append(text)
             info = parse_order_text(text)
             if not buyer and info.get("buyer"):
                 buyer = info["buyer"]
@@ -665,15 +705,32 @@ def copy_visible_quick_copy_orders_info():
 
             price = float(info.get("price") or 0)
             price_each = price / len(order_ids) if order_ids else 0
+            new_order_added_by_button = False
+            duplicate_seen_by_button = False
             
             for order_id in order_ids:
                 current_scan_last_id = order_id
                 if order_id in order_items:
                     print(f"订单 {order_id} 已复制过。")
                     duplicate_count_in_scan += 1
+                    duplicate_seen_by_button = True
                     continue
                 order_items[order_id] = {"order_id": order_id, "price": price_each}
                 new_order_added_in_scan = True
+                new_order_added_by_button = True
+                new_order_count_in_scan += 1
+
+            if new_order_added_by_button:
+                copied_texts.append(text)
+
+            if scan_index > 0 and duplicate_seen_by_button and not new_order_added_by_button:
+                print("本次点到滚动后残留的重复订单，立即加大下滑幅度。")
+                scroll_boost = 3
+                should_leave_current_scan = True
+                break
+
+        if should_leave_current_scan:
+            continue
 
         # 检测是否卡在原地
         if current_scan_last_id == last_scan_final_order_id and current_scan_last_id is not None:
@@ -689,8 +746,11 @@ def copy_visible_quick_copy_orders_info():
         if expected_count and len(order_items) < expected_count:
             if not new_order_added_in_scan:
                 scroll_boost = 2 if duplicate_count_in_scan > 0 else 1
+            elif new_order_count_in_scan == 1 and len(buttons) == 1:
+                scroll_boost = 3
+                print("当前屏只有 1 个新订单，下一次加大下滑幅度跳过重叠区域。")
             else:
-                scroll_boost = 0
+                scroll_boost = 1
 
         if expected_count and len(order_items) >= expected_count:
             break
