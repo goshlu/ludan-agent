@@ -598,17 +598,21 @@ def copy_selected_text_from_point(point):
 
 
 def copy_visible_quick_copy_orders_info():
+    close_shipping_dialog_if_needed()
     reset_right_panel_to_top()
 
     expected_count = get_expected_quick_copy_order_count()
     copied_texts = []
     order_items = {}
     buyer = ""
-    seen_button_centers = []
     index = 0
     scroll_boost = 0
+    
+    # 用于检测死循环：记录上一次扫描拿到的最后一个订单ID
+    last_scan_final_order_id = None
+    stagnant_scan_count = 0
 
-    max_scan_count = max(6, min(18, expected_count * 3 if expected_count else 6))
+    max_scan_count = max(8, min(25, expected_count * 4 if expected_count else 8))
     for scan_index in range(max_scan_count):
         scan_name = "当前可见区域" if scan_index == 0 else f"下滑后第 {scan_index} 次可见区域"
         if scan_index > 0:
@@ -616,6 +620,8 @@ def copy_visible_quick_copy_orders_info():
             scroll_right_orders_panel_down(extra_steps=scroll_boost)
             scroll_boost = 0
 
+        # 重点优化 1: seen_button_centers 改为单次扫描内有效
+        seen_button_centers = []
         buttons = [
             button for button in find_quick_copy_button_candidates()
             if not is_button_already_seen(button, seen_button_centers)
@@ -625,23 +631,27 @@ def copy_visible_quick_copy_orders_info():
 
         if not buttons:
             print(f"{scan_name}没有找到新的快捷复制按钮。")
+            if expected_count and len(order_items) < expected_count:
+                scroll_boost = 1
             continue
 
         if expected_count and len(order_items) >= expected_count:
-            print(f"已拿到 {len(order_items)}/{expected_count} 个订单，停止继续查找快捷复制。")
+            print(f"已拿到 {len(order_items)}/{expected_count} 个订单，停止继续查找。")
             break
 
         print(f"{scan_name}找到 {len(buttons)} 个新的快捷复制按钮。")
+        new_order_added_in_scan = False
+        duplicate_count_in_scan = 0
+        current_scan_last_id = None
+
         for button in buttons:
             if expected_count and len(order_items) >= expected_count:
-                print(f"已拿到 {len(order_items)}/{expected_count} 个订单，停止点击快捷复制。")
                 break
 
             seen_button_centers.append((button["center_x"], button["center_y"]))
             index += 1
             text = copy_order_text_from_quick_copy_button(button, index)
             if not text.strip():
-                print(f"第 {index} 个快捷复制按钮没有复制到内容。")
                 continue
 
             copied_texts.append(text)
@@ -650,31 +660,37 @@ def copy_visible_quick_copy_orders_info():
                 buyer = info["buyer"]
 
             order_ids = [order_id for order_id in info.get("order_id", "").split("/") if order_id]
-            if not order_ids or not info.get("price"):
-                print(f"第 {index} 个快捷复制内容没有解析到订单号/价格。")
+            if not order_ids:
                 continue
 
-            price = float(info["price"])
-            price_each = price / len(order_ids)
-            new_order_added = False
+            price = float(info.get("price") or 0)
+            price_each = price / len(order_ids) if order_ids else 0
+            
             for order_id in order_ids:
+                current_scan_last_id = order_id
                 if order_id in order_items:
-                    print(f"订单 {order_id} 已复制过，跳过重复计入。")
+                    print(f"订单 {order_id} 已复制过。")
+                    duplicate_count_in_scan += 1
                     continue
-                order_items[order_id] = {
-                    "order_id": order_id,
-                    "price": price_each,
-                }
-                new_order_added = True
+                order_items[order_id] = {"order_id": order_id, "price": price_each}
+                new_order_added_in_scan = True
 
-            if scan_index > 0 and expected_count and len(order_items) < expected_count:
-                if new_order_added:
-                    print("本次下滑已拿到新订单，继续下滑找下一笔，避免反复点同屏旧订单。")
-                    scroll_boost = 1
-                else:
-                    print("本次点到的是已有订单，下一次加大下滑幅度找新订单。")
-                    scroll_boost = 3
-                break
+        # 检测是否卡在原地
+        if current_scan_last_id == last_scan_final_order_id and current_scan_last_id is not None:
+            stagnant_scan_count += 1
+            if stagnant_scan_count >= 2:
+                print(f"检测到连续 {stagnant_scan_count} 次扫描结果相同，强制加大下滑幅度。")
+                scroll_boost = 3 # 强制 PageDown
+        else:
+            stagnant_scan_count = 0
+        
+        last_scan_final_order_id = current_scan_last_id
+
+        if expected_count and len(order_items) < expected_count:
+            if not new_order_added_in_scan:
+                scroll_boost = 2 if duplicate_count_in_scan > 0 else 1
+            else:
+                scroll_boost = 0
 
         if expected_count and len(order_items) >= expected_count:
             break
@@ -772,11 +788,22 @@ def copy_order_text_from_quick_copy_button(button, index=None):
     control = button["control"]
     copied_text = invoke_quick_copy_control_by_pywinauto(control, marker)
     if copied_text == marker:
-        print("pywinauto invoke 快捷复制未生效，改用坐标点击兜底。")
-        if pyautogui is None:
-            return ""
-        pyautogui.click(button["center_x"], button["center_y"])
-        copied_text = wait_for_clipboard_change(marker, timeout=0.28, interval=0.02)
+        print("pywinauto invoke 快捷复制未生效，改用原生点击兜底。")
+        try:
+            # 优先使用 pywinauto 的 click_input，它比 pyautogui 更精准
+            # 指定点击控件内部的中心位置，显式计算偏移量
+            offset_x = int((button["right"] - button["left"]) / 2)
+            offset_y = int((button["bottom"] - button["top"]) / 2)
+            control.click_input(coords=(offset_x, offset_y))
+            copied_text = wait_for_clipboard_change(marker, timeout=0.35, interval=0.02)
+        except Exception as exc:
+            print(f"原生点击失败: {exc}")
+            if pyautogui is not None:
+                pyautogui.click(button["center_x"], button["center_y"])
+                copied_text = wait_for_clipboard_change(marker, timeout=0.28, interval=0.02)
+
+    # 关键点：点击后立即检查是否弹出了干扰对话框并尝试关闭
+    close_shipping_dialog_if_needed()
 
     copied_text = "" if copied_text == marker else normalize_text(copied_text)
     if copied_text:
@@ -787,16 +814,22 @@ def copy_order_text_from_quick_copy_button(button, index=None):
 
 
 def invoke_quick_copy_control_by_pywinauto(control, marker):
-    for action in (
+    # 尝试多种调用方式
+    actions = [
         lambda: control.invoke(),
         lambda: control.iface_invoke.Invoke(),
-    ):
+    ]
+    # 如果是 Legacy 模式的按钮
+    if hasattr(control, 'legacy_properties'):
+        actions.append(lambda: control.click_input())
+
+    for action in actions:
         try:
             action()
         except Exception:
             continue
 
-        copied_text = wait_for_clipboard_change(marker, timeout=0.18, interval=0.02)
+        copied_text = wait_for_clipboard_change(marker, timeout=0.22, interval=0.02)
         if copied_text != marker:
             return copied_text
 
@@ -850,17 +883,47 @@ def scroll_right_orders_panel_down(extra_steps=0):
         print("没有定位到右侧订单面板，跳过本次下滑。")
         return
 
-    # 多次大幅滚动，确保翻过至少一个订单卡；遇到重复订单后会加大幅度跳过重叠区域。
-    steps = 4 + max(0, int(extra_steps))
-    print(f"正在下滑右侧订单面板: {steps} 次。")
-    pyautogui.moveTo(point["x"], point["y"])
-    time.sleep(0.03)
-    pyautogui.click(point["x"], point["y"])
-    time.sleep(0.03)
-    for _ in range(steps):
-        pyautogui.scroll(-80)
-        time.sleep(0.02)
-    time.sleep(0.25 + min(0.12, max(0, extra_steps) * 0.03))
+    # 重点优化 6: 使用更可靠的下滑方式 (PageDown 或 连续 Down)
+    # 很多应用对 pyautogui.scroll 响应不灵敏。
+    print(f"正在下滑右侧订单面板 (boost={extra_steps})...")
+    
+    # 先点一下确保焦点在面板上，但避开可能的按钮区域 (稍微偏左一点)
+    pyautogui.click(point["x"] - 20, point["y"])
+    time.sleep(0.05)
+    
+    if extra_steps >= 2:
+        # 大幅下滑
+        keyboard.press_and_release("page down")
+    else:
+        # 中小幅下滑，使用多次向下键或滚轮
+        for _ in range(3 + int(extra_steps)):
+            keyboard.press_and_release("down")
+            time.sleep(0.01)
+            pyautogui.scroll(-120) # 120 是标准一个刻度
+            
+    time.sleep(0.4) # 给 UI 留足刷新时间
+
+
+def close_shipping_dialog_if_needed():
+    """如果因为误点弹出了'发货'对话框，尝试关闭它以免阻塞后续操作"""
+    window = get_qianniu_pywinauto_window()
+    if not window:
+        return
+        
+    try:
+        # 查找包含 "发货" 标题的子窗口或对话框
+        dialogs = window.descendants(control_type="Window")
+        for dlg in dialogs:
+            name = str(dlg.window_text() or "")
+            if "发货" in name and dlg.is_visible():
+                print(f"检测到已打开的'{name}'窗口，正在尝试关闭...")
+                # 尝试按 Esc 或点击关闭按钮
+                dlg.set_focus()
+                keyboard.press_and_release("esc")
+                time.sleep(0.3)
+                break
+    except Exception:
+        pass
 
 
 def generate_template():
@@ -926,7 +989,10 @@ def copy_chat_input_text():
     return copied
 
 
+_cached_qianniu_window = None
+
 def find_pywinauto_controls_by_keyword(keyword):
+    global _cached_qianniu_window
     if Desktop is None:
         print("未安装 pywinauto，无法使用 pywinauto 查找控件。")
         return []
@@ -934,53 +1000,80 @@ def find_pywinauto_controls_by_keyword(keyword):
     candidates = []
     window_rect = get_qianniu_window_rect()
 
-    try:
-        windows = Desktop(backend="uia").windows()
-    except Exception as exc:
-        print(f"pywinauto 获取窗口失败: {exc}")
+    # 尝试使用缓存的窗口，验证其有效性
+    window = _cached_qianniu_window
+    if window:
+        try:
+            # 简单检查窗口是否还存在
+            _ = window.window_text()
+        except Exception:
+            window = None
+
+    if not window:
+        try:
+            windows = Desktop(backend="uia").windows()
+            for w in windows:
+                try:
+                    name = str(w.window_text() or "")
+                except Exception:
+                    continue
+                if any(excluded in name for excluded in EXCLUDED_WINDOW_KEYWORDS):
+                    continue
+                if any(keyword_name in name for keyword_name in QIANNIU_WINDOW_KEYWORDS):
+                    window = w
+                    _cached_qianniu_window = w
+                    break
+        except Exception as exc:
+            print(f"pywinauto 获取窗口失败: {exc}")
+            return []
+
+    if not window:
         return []
 
-    for window in windows:
+    try:
+        descendants = window.descendants()
+    except Exception as exc:
+        print(f"pywinauto 遍历窗口控件失败: {exc}")
+        return []
+
+    for control in descendants:
         try:
-            name = str(window.window_text() or "")
+            # 增加对 AutomationId, Name, ClassName 等更深层的过滤
+            # 避免 "发货" 按钮在某些层级里隐藏了 "快捷复制" 关键词
+            desc = str(control).lower()
+            if "发货" in desc or "ship" in desc:
+                continue
+                
+            text = str(control.window_text() or "").strip()
         except Exception:
-            name = ""
+            text = ""
 
-        if any(excluded in name for excluded in EXCLUDED_WINDOW_KEYWORDS):
-            continue
-        if not any(keyword_name in name for keyword_name in QIANNIU_WINDOW_KEYWORDS):
+        # 重点优化 4: 严格匹配 "快捷复制"
+        if text != keyword:
             continue
 
         try:
-            descendants = window.descendants()
-        except Exception as exc:
-            print(f"pywinauto 遍历窗口控件失败: {exc}")
+            rect = control.rectangle()
+        except Exception:
             continue
 
-        for control in descendants:
-            try:
-                text = str(control.window_text() or "")
-            except Exception:
-                text = ""
+        if rect.right <= rect.left or rect.bottom <= rect.top:
+            continue
 
-            if keyword not in text:
-                continue
+        # 重点优化 5: 增加尺寸过滤。快捷复制是非常小的文字链或小按钮。
+        width = rect.right - rect.left
+        height = rect.bottom - rect.top
+        # 常见快捷复制按钮大约 60x20，设个紧凑范围
+        if width > 100 or height > 35:
+            continue
 
-            try:
-                rect = control.rectangle()
-            except Exception:
-                continue
+        if (
+            window_rect
+            and rect.left < window_rect["left"] + window_rect["width"] * 0.55
+        ):
+            continue
 
-            if rect.right <= rect.left or rect.bottom <= rect.top:
-                continue
-
-            if (
-                window_rect
-                and rect.left < window_rect["left"] + window_rect["width"] * 0.55
-            ):
-                continue
-
-            candidates.append({
+        candidates.append({
                 "control": control,
                 "text": text,
                 "left": rect.left,
