@@ -987,30 +987,35 @@ def close_shipping_dialog_if_needed():
 
 
 def generate_template():
-    chat_input_text = copy_chat_input_text()
-    info = get_order_info()
-    info = merge_order_info_with_chat_input(info, chat_input_text)
+    start_time = time.perf_counter()
+    try:
+        chat_input_text = copy_chat_input_text()
+        info = get_order_info()
+        info = merge_order_info_with_chat_input(info, chat_input_text)
 
-    missing = [name for name in ("order_id", "price") if not info.get(name)]
-    if missing:
-        if info.get("_right_orders_text_empty"):
-            print("没有复制到右侧订单区域文本。请确认右侧近3个月订单区域可见。")
-            print("Ctrl+1 已保存空内容到 qianniu_last_right_orders_text.txt。")
+        missing = [name for name in ("order_id", "price") if not info.get(name)]
+        if missing:
+            if info.get("_right_orders_text_empty"):
+                print("没有复制到右侧订单区域文本。请确认右侧近3个月订单区域可见。")
+                print("Ctrl+1 已保存空内容到 qianniu_last_right_orders_text.txt。")
+                return
+
+            print(f"缺少字段: {', '.join(missing)}")
+            print("Ctrl+1 已复制右侧订单区域，并保存到 qianniu_last_right_orders_text.txt。")
+            print("请检查该文件里是否包含订单编号和明确价格字段，例如 接单价格/订单总付款/订单总价/实付金额/实付。")
             return
 
-        print(f"缺少字段: {', '.join(missing)}")
-        print("Ctrl+1 已复制右侧订单区域，并保存到 qianniu_last_right_orders_text.txt。")
-        print("请检查该文件里是否包含订单编号和明确价格字段，例如 接单价格/订单总付款/订单总价/实付金额/实付。")
-        return
+        template = build_order_template(info)
+        pyperclip.copy(template)
+        print(f"已自动读取订单 {info['order_id']}，价格 {info['price']}，并生成模板。")
 
-    template = build_order_template(info)
-    pyperclip.copy(template)
-    print(f"已自动读取订单 {info['order_id']}，价格 {info['price']}，并生成模板。")
-
-    if paste_to_chat_input(template):
-        print("已粘贴到千牛聊天输入框。")
-    else:
-        print("模板已复制到剪贴板，但未能自动粘贴。")
+        if paste_to_chat_input(template):
+            print("已粘贴到千牛聊天输入框。")
+        else:
+            print("模板已复制到剪贴板，但未能自动粘贴。")
+    finally:
+        elapsed = time.perf_counter() - start_time
+        print(f"Ctrl+1 执行完成，耗时 {elapsed:.2f} 秒。")
 
 
 def reset_right_panel_to_top():
