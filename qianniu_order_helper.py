@@ -66,6 +66,16 @@ def co_uninitialize(mode):
         pass
 
 
+def send_ctrl_key(key, fallback="{Ctrl}"):
+    try:
+        keyboard.press_and_release(f"ctrl+{key}")
+        return
+    except Exception:
+        pass
+
+    auto.SendKeys(f"{fallback}{key}")
+
+
 def find_qianniu_window():
     for pattern in QIANNIU_WINDOW_PATTERNS:
         try:
@@ -205,51 +215,110 @@ def collect_visible_text_controls(control, depth=0, max_depth=18):
     return result
 
 
-def is_pending_delivery_order_button(btn, win):
+def is_pending_delivery_order_button(btn, win, visible_texts=None):
     """
     判断某个【快捷复制】按钮是否属于【待发货】订单。
 
     逻辑：
     1. 取按钮所在行的坐标
-    2. 在按钮上下附近查找文本
-    3. 只有附近出现【待发货】才允许复制
-    4. 附近出现【交易成功/已完成/已关闭/退款/待付款】等状态则跳过
+    2. 在按钮左侧同行区域查找状态文本（±40px 垂直范围）
+    3. 左侧同行找到坏状态 → 跳过；找到待发货 → 通过
+    4. 左侧同行未找到状态 → 扩大到 ±200px 检查附近有无坏状态
+    5. 附近无坏状态 → 默认通过（待发货订单的状态标签可能在tab而非卡片内）
     """
     bl, bt, br, bb = get_rect(btn)
     if br <= bl or bb <= bt:
         return False
 
     row_center_y = (bt + bb) / 2
-    texts = collect_visible_text_controls(win)
-
-    nearby_names = []
-
-    for item in texts:
-        name = item["name"]
-        l, t, r, b = item["rect"]
-        center_y = (t + b) / 2
-
-        # 同一订单行附近的文本。
-        # 千牛不同分辨率/缩放下位置可能略有偏差，所以这里放宽到上下 90 像素。
-        if abs(center_y - row_center_y) <= 90:
-            nearby_names.append(name)
-
-    nearby_text = " ".join(nearby_names)
+    texts = visible_texts if visible_texts is not None else collect_visible_text_controls(win)
 
     bad_status = [
         "交易成功", "已完成", "已关闭", "交易关闭", "已取消",
         "退款", "退款成功", "售后", "待付款", "待评价"
     ]
+    pending_status = "待发货"
 
-    if any(status in nearby_text for status in bad_status):
-        print(f"跳过非待发货订单，附近状态：{nearby_text[:120]}")
+    # 第一步：在按钮左侧同行区域（±40px 垂直，按钮左侧 60~300px）查找状态
+    left_row_status = None
+    left_row_status_type = None
+    left_row_status_dist = float("inf")
+
+    for item in texts:
+        name = item["name"]
+        il, it, ir, ib = item["rect"]
+        item_cy = (it + ib) / 2
+        v_dist = abs(item_cy - row_center_y)
+
+        if v_dist > 40:
+            continue
+        if ir > bl - 20 or il < bl - 400:
+            continue
+
+        for status in bad_status:
+            if status in name:
+                h_dist = bl - ir
+                dist = h_dist + v_dist
+                if dist < left_row_status_dist:
+                    left_row_status_dist = dist
+                    left_row_status = name
+                    left_row_status_type = "bad"
+                break
+
+        if pending_status in name and "(" not in name:
+            h_dist = bl - ir
+            dist = h_dist + v_dist
+            if dist < left_row_status_dist:
+                left_row_status_dist = dist
+                left_row_status = name
+                left_row_status_type = "pending"
+
+    if left_row_status_type == "bad":
+        print(f"跳过订单：左侧同行找到坏状态「{left_row_status}」(d={left_row_status_dist:.0f})")
         return False
-
-    if "待发货" in nearby_text:
+    if left_row_status_type == "pending":
         return True
 
-    print(f"跳过未识别到【待发货】的订单，附近文本：{nearby_text[:120]}")
-    return False
+    # 第二步：左侧同行未找到状态，扩大范围检查附近有无坏状态（±200px）
+    nearest_bad_dist = float("inf")
+    nearest_bad_name = None
+    nearest_pending_dist = float("inf")
+
+    for item in texts:
+        name = item["name"]
+        il, it, ir, ib = item["rect"]
+        item_cy = (it + ib) / 2
+        v_dist = abs(item_cy - row_center_y)
+
+        if v_dist > 200:
+            continue
+
+        for status in bad_status:
+            if status in name:
+                h_dist = max(0, il - br) if il > br else max(0, bl - ir)
+                dist = h_dist + v_dist * 2
+                if dist < nearest_bad_dist:
+                    nearest_bad_dist = dist
+                    nearest_bad_name = name
+                break
+
+        if pending_status in name and "(" not in name:
+            h_dist = max(0, il - br) if il > br else max(0, bl - ir)
+            dist = h_dist + v_dist * 2
+            if dist < nearest_pending_dist:
+                nearest_pending_dist = dist
+
+    if nearest_bad_dist < float("inf") and nearest_pending_dist >= float("inf"):
+        print(f"跳过订单：附近找到坏状态「{nearest_bad_name}」(d={nearest_bad_dist:.0f})，无待发货")
+        return False
+    if nearest_bad_dist < float("inf") and nearest_pending_dist < float("inf"):
+        if nearest_pending_dist <= nearest_bad_dist:
+            return True
+        print(f"跳过订单：坏状态(d={nearest_bad_dist:.0f}) < 待发货(d={nearest_pending_dist:.0f})")
+        return False
+
+    # 第三步：附近无坏状态也无待发货 → 默认通过
+    return True
 
 
 
@@ -481,6 +550,21 @@ def copy_from_quick_copy_button(btn, index=1):
     return ""
 
 
+def is_pending_delivery_from_copied_text(text):
+    """
+    从快捷复制的文本内容中判断是否为【待发货】订单。
+    快捷复制的文本通常包含订单状态信息，如"待发货"、"已完成"等。
+    """
+    bad_status = [
+        "交易成功", "已完成", "已关闭", "交易关闭", "已取消",
+        "退款", "退款成功", "售后", "待付款", "待评价"
+    ]
+    for status in bad_status:
+        if status in text:
+            return False
+    return True
+
+
 def copy_all_visible_orders(win):
     quick_buttons = sorted(find_controls_by_name(win, QUICK_COPY_NAME), key=top_value)
 
@@ -488,30 +572,21 @@ def copy_all_visible_orders(win):
         print("未找到【快捷复制】按钮，请展开右侧近3个月订单。")
         return []
 
-    print(f"找到 {len(quick_buttons)} 个【快捷复制】按钮，开始筛选【待发货】订单。")
-
-    pending_buttons = []
-
-    for index, btn in enumerate(quick_buttons, 1):
-        if is_pending_delivery_order_button(btn, win):
-            pending_buttons.append(btn)
-            print(f"第 {index} 个订单状态为【待发货】，允许快捷复制。")
-        else:
-            print(f"第 {index} 个订单不是【待发货】，跳过。")
-
-    if not pending_buttons:
-        print("当前可见订单中未找到【待发货】订单，停止复制。")
-        return []
-
-    print(f"共找到 {len(pending_buttons)} 个【待发货】订单，开始复制并合并。")
+    print(f"找到 {len(quick_buttons)} 个【快捷复制】按钮，开始复制并检查状态。")
 
     copied_list = []
     seen = set()
 
-    for index, btn in enumerate(pending_buttons, 1):
+    for index, btn in enumerate(quick_buttons, 1):
         copied = copy_from_quick_copy_button(btn, index)
 
         if not copied:
+            continue
+
+        # 从复制的文本内容判断是否为待发货订单
+        if not is_pending_delivery_from_copied_text(copied):
+            order_id = extract_order_id(copied) or "未知"
+            print(f"第 {index} 个订单不是【待发货】（订单号：{order_id}），跳过。")
             continue
 
         order_id = extract_order_id(copied)
@@ -523,7 +598,13 @@ def copy_all_visible_orders(win):
 
         seen.add(key)
         copied_list.append(copied)
+        print(f"第 {index} 个订单状态为【待发货】，已复制（订单号：{order_id}）。")
 
+    if not copied_list:
+        print("当前可见订单中未找到【待发货】订单，停止复制。")
+        return []
+
+    print(f"共找到 {len(copied_list)} 个【待发货】订单，开始合并。")
     return copied_list
 
 
@@ -631,6 +712,9 @@ def filter_orders_within_5_minutes(copied_list):
     第一单永远保留。
     后续订单只有与第一单付款时间间隔 <= 5 分钟才保留。
     超过 5 分钟：不合并、不写备注。
+
+    特殊情况：如果快捷复制的文本中不含付款时间字段（千牛快捷复制
+    通常不包含付款时间），则全部保留，不做时间过滤。
     """
     if not copied_list:
         return []
@@ -639,8 +723,8 @@ def filter_orders_within_5_minutes(copied_list):
     first_time = parse_pay_time(first_text)
 
     if not first_time:
-        print("第一单未识别到付款时间，只处理第一单。")
-        return [first_text]
+        print("未识别到付款时间，跳过时间过滤，保留全部订单。")
+        return copied_list[:]
 
     result = [first_text]
 
@@ -648,7 +732,8 @@ def filter_orders_within_5_minutes(copied_list):
         pay_time = parse_pay_time(text)
 
         if not pay_time:
-            print(f"第 {index} 单未识别到付款时间，跳过。")
+            print(f"第 {index} 单未识别到付款时间，保留该订单。")
+            result.append(text)
             continue
 
         diff_seconds = abs((pay_time - first_time).total_seconds())
@@ -742,7 +827,7 @@ def parse_selected_role_phone(text):
     return "", ""
 
 
-def read_selected_role_phone():
+def read_selected_role_phone(win=None):
     """
     Ctrl+1执行时：
     先读取聊天输入框里的【角色名 + 电话】。
@@ -761,20 +846,19 @@ def read_selected_role_phone():
         marker = f"__QIANNIU_ROLE_PHONE_MARKER_{time.time()}__"
         pyperclip.copy(marker)
 
-        win = find_qianniu_window()
         if win:
             try:
                 win.SetActive()
-                time.sleep(0.03)
+                time.sleep(0.005)
             except Exception:
                 pass
 
-        auto.SendKeys("{Ctrl}i")
-        time.sleep(0.03)
-        auto.SendKeys("{Ctrl}a")
-        time.sleep(0.03)
-        auto.SendKeys("{Ctrl}c")
-        time.sleep(0.05)
+        send_ctrl_key("i")
+        time.sleep(0.005)
+        send_ctrl_key("a")
+        time.sleep(0.005)
+        send_ctrl_key("c")
+        time.sleep(0.01)
 
         selected = pyperclip.paste()
         if selected == marker:
@@ -955,6 +1039,13 @@ def copy_all_and_put_into_each_remark():
 
     try:
         start_time = time.time()
+        last_mark_time = start_time
+
+        def mark_step(name):
+            nonlocal last_mark_time
+            now = time.time()
+            print(f"[耗时] {name}: 本段 {now - last_mark_time:.2f}s，累计 {now - start_time:.2f}s")
+            last_mark_time = now
 
         win = find_qianniu_window()
 
@@ -962,6 +1053,7 @@ def copy_all_and_put_into_each_remark():
             print("未找到千牛窗口，请确认窗口标题包含：接待中心 / 千牛 / 接待 / 工作台")
             print_top_windows()
             return
+        mark_step("查找千牛窗口")
 
         try:
             win.SetActive()
@@ -971,15 +1063,18 @@ def copy_all_and_put_into_each_remark():
         wangwang_name = ""
 
         # 读取当前选中的角色名和电话
-        role_name, phone = read_selected_role_phone()
+        role_name, phone = read_selected_role_phone(win)
+        mark_step("读取角色电话")
 
         copied_list = copy_all_visible_orders(win)
+        mark_step("筛选并快捷复制订单")
 
         if not copied_list:
             print("没有复制到任何订单内容，停止。")
             return
 
         copied_list = attach_wangwang_to_orders(copied_list, wangwang_name)
+        mark_step("补充旺旺信息")
 
         for item in copied_list:
             real_ww = extract_buyer_wangwang_from_order(item)
@@ -988,6 +1083,7 @@ def copy_all_and_put_into_each_remark():
                 break
 
         copied_list = filter_orders_within_5_minutes(copied_list)
+        mark_step("过滤5分钟订单")
 
         if not copied_list:
             print("没有符合 5 分钟规则的订单，停止。")
@@ -999,6 +1095,7 @@ def copy_all_and_put_into_each_remark():
 
         with open("qianniu_merged_orders.txt", "w", encoding="utf-8") as f:
             f.write(merged_text)
+        mark_step("生成模板")
 
         print("================ 最终文案 ================")
         print(merged_text)
@@ -1008,18 +1105,19 @@ def copy_all_and_put_into_each_remark():
         # 使用 Ctrl+I 聚焦聊天输入框
         try:
             win.SetActive()
-            time.sleep(0.02)
+            time.sleep(0.005)
         except Exception:
             pass
 
-        auto.SendKeys("{Ctrl}i")
-        time.sleep(0.02)
+        send_ctrl_key("i")
+        time.sleep(0.005)
 
-        auto.SendKeys("{Ctrl}a")
-        time.sleep(0.01)
+        send_ctrl_key("a")
+        time.sleep(0.005)
 
-        auto.SendKeys("{Ctrl}v")
-        time.sleep(0.02)
+        send_ctrl_key("v")
+        time.sleep(0.005)
+        mark_step("粘贴聊天输入框")
 
         duration = round(time.time() - start_time, 2)
 
