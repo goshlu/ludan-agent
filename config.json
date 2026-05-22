@@ -3,5 +3,39 @@
     "GAME_ID": "15",
     "CHROME_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
     "LOCAL_PORT": 555,
+    "ORDER_TEMPLATES": {
+        "default": {
+            "name": "通用模板",
+            "hotkey": "ctrl+1",
+            "game_id": "15",
+            "time_window_minutes": 10,
+            "template": "订单编号：{order_ids}\n系统区服：{system_server}\n旺旺：{wangwang}\n购买项目：{project}\n游戏大区：{game_area}\n角色名：{role_name}\n当前等级：{current_level}\n接单价格：{price}\n联系电话：{phone}\n游戏账号：{game_account}\n游戏密码：{game_password}\n订单来源：{order_source}",
+            "defaults": {
+                "system_server": "",
+                "project": "",
+                "game_area": "",
+                "current_level": "",
+                "game_account": "扫码",
+                "game_password": "扫码",
+                "order_source": ""
+            }
+        },
+        "yuanshen_b": {
+            "name": "原神B服",
+            "hotkey": "ctrl+3",
+            "game_id": "15",
+            "time_window_minutes": 10,
+            "template": "订单编号：{order_ids}\n系统区服：{system_server}\n旺旺：{wangwang}\n购买项目：{project}\n游戏大区：{game_area}\n角色名：{role_name}\n当前等级：{current_level}\n接单价格：{price}\n联系电话：{phone}\n游戏账号：{game_account}\n游戏密码：{game_password}\n订单来源：{order_source}",
+            "defaults": {
+                "system_server": "B服",
+                "project": "原神6.6的9-10主线",
+                "game_area": "QQ",
+                "current_level": "11",
+                "game_account": "扫码",
+                "game_password": "扫码",
+                "order_source": "宝珠姐"
+            }
+        }
+    },
     "DELETE_NOTICE_TEXT": "注：切勿私下添加代练，所有资金均在抖音本店产生交易，如私下交易造成资金损失，小店一律不予补偿交易损失，谨防上当受骗。\r\n注：如代练期间产生封号十年情况，小店会第一时间进行核实，如情况属实会对您的账号进行评估并赔偿。\r\n注：车快慢与技术无关 正常都会在规定时间完成，具体效率和账号是否被官方黑屋有关（黑屋解释：可抖音搜索相关视频了解）如出现黑屋可直接进行进度结算，或转化为代肝订单不会产生此类问题。"
 }

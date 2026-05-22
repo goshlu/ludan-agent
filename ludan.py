@@ -54,6 +54,37 @@ DEFAULT_CONFIG = {
     "GAME_ID": "15",
     "CHROME_PATH": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
     "LOCAL_PORT": 555,
+    "ORDER_TEMPLATES": {
+        "default": {
+            "name": "通用模板",
+            "hotkey": "ctrl+1",
+            "game_id": "15",
+            "time_window_minutes": 10,
+            "template": (
+                "订单编号：{order_ids}\n"
+                "系统区服：{system_server}\n"
+                "旺旺：{wangwang}\n"
+                "购买项目：{project}\n"
+                "游戏大区：{game_area}\n"
+                "角色名：{role_name}\n"
+                "当前等级：{current_level}\n"
+                "接单价格：{price}\n"
+                "联系电话：{phone}\n"
+                "游戏账号：{game_account}\n"
+                "游戏密码：{game_password}\n"
+                "订单来源：{order_source}"
+            ),
+            "defaults": {
+                "system_server": "",
+                "project": "",
+                "game_area": "",
+                "current_level": "",
+                "game_account": "扫码",
+                "game_password": "扫码",
+                "order_source": "",
+            },
+        }
+    },
     "DELETE_NOTICE_TEXT": (
         "注：切勿私下添加代练，所有资金均在抖音本店产生交易，如私下交易造成资金损失，小店一律不予补偿交易损失，谨防上当受骗。\r\n"
         "注：如代练期间产生封号十年情况，小店会第一时间进行核实，如情况属实会对您的账号进行评估并赔偿。\r\n"
@@ -93,6 +124,8 @@ GAME_ID = str(CONFIG.get("GAME_ID", DEFAULT_CONFIG["GAME_ID"]))
 CHROME_PATH = str(CONFIG.get("CHROME_PATH", DEFAULT_CONFIG["CHROME_PATH"]))
 LOCAL_PORT = int(CONFIG.get("LOCAL_PORT", DEFAULT_CONFIG["LOCAL_PORT"]))
 DELETE_NOTICE_TEXT = str(CONFIG.get("DELETE_NOTICE_TEXT", DEFAULT_CONFIG["DELETE_NOTICE_TEXT"]))
+ORDER_TEMPLATES = CONFIG.get("ORDER_TEMPLATES", DEFAULT_CONFIG["ORDER_TEMPLATES"])
+CURRENT_ORDER_TEMPLATE_KEY = "default"
 
 ORDER_ID_FILE = str(APP_DIR / "order_ids.txt")
 COOKIES_FILE = str(APP_DIR / "cookies.txt")
@@ -175,6 +208,40 @@ def show_order_notification(text_notification, result):
         print(f"发送通知失败：{str(e)}")
 
 
+def notify_step_error(message, title="自动录单出错"):
+    print(message)
+    show_order_notification(message, title)
+
+
+def get_order_template(template_key=None):
+    templates = ORDER_TEMPLATES if isinstance(ORDER_TEMPLATES, dict) else {}
+    key = template_key or CURRENT_ORDER_TEMPLATE_KEY
+
+    template = templates.get(key)
+    if not isinstance(template, dict):
+        template = templates.get("default")
+        key = "default"
+
+    if not isinstance(template, dict):
+        template = DEFAULT_CONFIG["ORDER_TEMPLATES"]["default"]
+        key = "default"
+
+    return key, template
+
+
+def get_template_game_id(template_key=None):
+    _, template = get_order_template(template_key)
+    return str(template.get("game_id") or GAME_ID)
+
+
+def safe_format_template(template_text, values):
+    class SafeDict(dict):
+        def __missing__(self, key):
+            return ""
+
+    return str(template_text).format_map(SafeDict(values))
+
+
 # =========================
 # 文本解析模块
 # =========================
@@ -206,14 +273,14 @@ def get_page_cookies(page):
         return page.cookies.as_dict()
 
 
-def is_order_missing(order_phone_seat, cookies):
+def is_order_missing(order_phone_seat, cookies, game_id=None):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     }
     params = {
         "page": "1",
         "limit": "15",
-        "gameId": GAME_ID,
+        "gameId": str(game_id or GAME_ID),
         "userType": "1",
         "isAdvanceOrder": "0",
         "isTeamOrder": "0",
@@ -456,7 +523,7 @@ def wait_layer_text(page, timeout=5):
 # =========================
 # 自动录单
 # =========================
-def run_extraction_task(page):
+def run_extraction_task(page, order_text=None):
     try:
         if not page.url:
             print("浏览器已关闭或断开连接")
@@ -466,7 +533,7 @@ def run_extraction_task(page):
         with open(COOKIES_FILE, "w", encoding="utf-8") as f:
             json.dump(current_cookies, f, ensure_ascii=False, indent=4)
 
-        original_str = pyperclip.paste()
+        original_str = order_text if order_text else pyperclip.paste()
         original_str = original_str.replace(DELETE_NOTICE_TEXT, "")
         parsed = extract_order_price(original_str)
         order_id = parsed["订单编号"]
@@ -485,7 +552,8 @@ def run_extraction_task(page):
             show_toast(page, f"订单编号 {order_id} 本地已存在，已阻止重复录单。", level="error", duration=4000)
             return
 
-        net_result = is_order_missing(order_id, current_cookies)
+        template_key, template = get_order_template()
+        net_result = is_order_missing(order_id, current_cookies, game_id=template.get("game_id"))
         if net_result is None:
             show_toast(page, "查重接口异常，已停止，不刷新不跳转。", level="error", duration=4000)
             return
@@ -636,8 +704,55 @@ def init_browser():
 # =========================
 # 热键绑定
 # =========================
+def read_qianniu_chat_input_for_submission():
+    """
+    Ctrl+2 录入后台前，优先读取千牛当前聊天输入框。
+    读不到时返回空字符串，调用方回退到剪贴板，保证热键后续仍可用。
+    """
+    mode = co_initialize()
+    old_clipboard = pyperclip.paste()
+
+    try:
+        win = find_qianniu_window()
+        if not win:
+            print("Ctrl+2 未找到千牛窗口，回退读取剪贴板。")
+            return ""
+
+        try:
+            win.SetActive()
+            time.sleep(0.03)
+        except Exception:
+            pass
+
+        marker = f"__JIAJIAPAI_SUBMIT_MARKER_{time.time()}__"
+        pyperclip.copy(marker)
+        send_ctrl_key("i")
+        time.sleep(0.03)
+        send_ctrl_key("a")
+        time.sleep(0.03)
+        send_ctrl_key("c")
+        time.sleep(0.05)
+
+        text = pyperclip.paste()
+        if text and text != marker:
+            print("Ctrl+2 已读取千牛聊天输入框内容。")
+            return text
+
+        pyperclip.copy(old_clipboard)
+        print("Ctrl+2 未读取到千牛聊天输入框内容，回退读取剪贴板。")
+        return ""
+
+    except Exception as e:
+        pyperclip.copy(old_clipboard)
+        notify_step_error(f"读取千牛聊天输入框失败，已回退剪贴板：{e}")
+        return ""
+
+    finally:
+        co_uninitialize(mode)
+
+
 def bind_hotkeys(page):
-    keyboard.add_hotkey("ctrl+2", lambda: run_extraction_task(page))
+    keyboard.add_hotkey("ctrl+2", lambda: run_extraction_task(page, read_qianniu_chat_input_for_submission()))
 
 
 # =========================
@@ -1319,9 +1434,10 @@ def parse_pay_time(text):
 
 
 def extract_pay_amount(text):
-    m = re.search(r"订单总付款[:：]\s*([0-9.]+)", text)
-    if m:
-        return parse_money(m.group(1))
+    for field in ("接单价格", "订单总付款", "订单总价", "实付金额", "实付"):
+        m = re.search(rf"{field}[:：]\s*[¥￥]?\s*([0-9]+(?:\.[0-9]+)?)", text)
+        if m:
+            return parse_money(m.group(1))
     return 0.0
 
 
@@ -1346,11 +1462,11 @@ def attach_wangwang_to_orders(copied_list, wangwang_name):
     return result
 
 
-def filter_orders_within_5_minutes(copied_list):
+def filter_orders_by_time_window(copied_list, window_minutes=10):
     """
     第一单永远保留。
-    后续订单只有与第一单付款时间间隔 <= 10 分钟才保留。
-    超过 10 分钟：不合并、不写备注。
+    后续订单只有与第一单付款时间间隔 <= 配置分钟数才保留。
+    超过配置分钟数：不合并、不写备注。
 
     特殊情况：如果快捷复制的文本中不含付款时间字段（千牛快捷复制
     通常不包含付款时间），则全部保留，不做时间过滤。
@@ -1378,13 +1494,17 @@ def filter_orders_within_5_minutes(copied_list):
         diff_seconds = abs((pay_time - first_time).total_seconds())
         diff_minutes = diff_seconds / 60
 
-        if diff_minutes <= 10:
+        if diff_minutes <= window_minutes:
             print(f"第 {index} 单付款时间间隔 {diff_minutes:.2f} 分钟，合并并备注。")
             result.append(text)
         else:
-            print(f"第 {index} 单付款时间间隔 {diff_minutes:.2f} 分钟，超过 10 分钟，跳过，不备注。")
+            print(f"第 {index} 单付款时间间隔 {diff_minutes:.2f} 分钟，超过 {window_minutes} 分钟，跳过，不备注。")
 
     return result
+
+
+def filter_orders_within_5_minutes(copied_list):
+    return filter_orders_by_time_window(copied_list, window_minutes=10)
 
 
 def normalize_role_phone_text(text):
@@ -1516,7 +1636,8 @@ def read_selected_role_phone(win=None):
         return "", ""
 
 
-def format_final_order_remark(copied_list, wangwang_name="", role_name="", phone=""):
+def format_final_order_remark(copied_list, wangwang_name="", role_name="", phone="", template_key=None):
+    _, template_config = get_order_template(template_key)
     order_ids = []
     total_amount = 0.0
     buyer_ww = ""
@@ -1537,18 +1658,25 @@ def format_final_order_remark(copied_list, wangwang_name="", role_name="", phone
     order_id_text = "/".join(order_ids)
     price_text = f"{total_amount:.2f}"
 
-    return f"""订单编号：{order_id_text}
-系统区服：B服
-旺旺：{buyer_ww}
-购买项目：原神6.6的9-10主线
-游戏大区：QQ
-角色名：{role_name}
-当前等级：11
-接单价格：{price_text}
-联系电话：{phone}
-游戏账号：扫码
-游戏密码：扫码
-订单来源：宝珠姐"""
+    defaults = template_config.get("defaults", {})
+    if not isinstance(defaults, dict):
+        defaults = {}
+
+    values = {
+        **defaults,
+        "order_ids": order_id_text,
+        "order_id": order_id_text,
+        "wangwang": buyer_ww,
+        "buyer_wangwang": buyer_ww,
+        "price": price_text,
+        "total_price": price_text,
+        "role_name": role_name,
+        "phone": phone,
+        "order_count": str(len(order_ids)),
+    }
+
+    template_text = template_config.get("template") or DEFAULT_CONFIG["ORDER_TEMPLATES"]["default"]["template"]
+    return safe_format_template(template_text, values)
 
 
 def merge_order_texts(copied_list, role_name="", phone=""):
@@ -1652,7 +1780,7 @@ def paste_to_qianniu_current_chat(text):
     return False
 
 
-def copy_all_and_put_into_each_remark():
+def copy_all_and_put_into_each_remark(template_key=None):
     """
     无备注版：
     1. 复制订单
@@ -1663,6 +1791,11 @@ def copy_all_and_put_into_each_remark():
     mode = co_initialize()
 
     try:
+        global CURRENT_ORDER_TEMPLATE_KEY
+        resolved_key, template = get_order_template(template_key)
+        CURRENT_ORDER_TEMPLATE_KEY = resolved_key
+        template_name = template.get("name", resolved_key)
+        time_window = float(template.get("time_window_minutes", 10) or 10)
         start_time = time.time()
         last_mark_time = start_time
 
@@ -1675,7 +1808,7 @@ def copy_all_and_put_into_each_remark():
         win = find_qianniu_window()
 
         if not win:
-            print("未找到千牛窗口，请确认窗口标题包含：接待中心 / 千牛 / 接待 / 工作台")
+            notify_step_error("未找到千牛窗口，请确认窗口标题包含：接待中心 / 千牛 / 接待 / 工作台")
             print_top_windows()
             return
         mark_step("查找千牛窗口")
@@ -1695,7 +1828,7 @@ def copy_all_and_put_into_each_remark():
         mark_step("筛选并快捷复制订单")
 
         if not copied_list:
-            print("没有复制到任何订单内容，停止。")
+            notify_step_error("没有复制到任何订单内容，请确认右侧订单区已展开且存在待发货订单。")
             return
 
         copied_list = attach_wangwang_to_orders(copied_list, wangwang_name)
@@ -1707,14 +1840,14 @@ def copy_all_and_put_into_each_remark():
                 wangwang_name = real_ww
                 break
 
-        copied_list = filter_orders_within_5_minutes(copied_list)
-        mark_step("过滤5分钟订单")
+        copied_list = filter_orders_by_time_window(copied_list, window_minutes=time_window)
+        mark_step(f"过滤{time_window:g}分钟订单")
 
         if not copied_list:
-            print("没有符合 5 分钟规则的订单，停止。")
+            notify_step_error(f"没有符合 {time_window:g} 分钟合单规则的订单，停止。")
             return
 
-        merged_text = format_final_order_remark(copied_list, wangwang_name, role_name, phone)
+        merged_text = format_final_order_remark(copied_list, wangwang_name, role_name, phone, template_key=resolved_key)
 
         pyperclip.copy(merged_text)
 
@@ -1723,6 +1856,7 @@ def copy_all_and_put_into_each_remark():
         mark_step("生成模板")
 
         print("================ 最终文案 ================")
+        print(f"当前模板：{template_name}（{resolved_key}）")
         print(merged_text)
         print("=========================================")
         print(f"最终处理 {len(copied_list)} 个订单")
@@ -1746,12 +1880,12 @@ def copy_all_and_put_into_each_remark():
 
         duration = round(time.time() - start_time, 2)
 
-        print("已自动粘贴到聊天输入框")
+        print(f"已按【{template_name}】模板自动粘贴到聊天输入框")
         print(f"执行时长: {duration} 秒")
         print("当前版本已彻底删除添加备注功能。")
 
     except Exception as e:
-        print("执行失败:", e)
+        notify_step_error(f"生成录单模板失败：{e}")
 
     finally:
         co_uninitialize(mode)
@@ -1812,20 +1946,52 @@ def copy_all_only():
         co_uninitialize(mode)
 
 
+def bind_order_template_hotkeys():
+    templates = ORDER_TEMPLATES if isinstance(ORDER_TEMPLATES, dict) else {}
+    if not templates:
+        templates = DEFAULT_CONFIG["ORDER_TEMPLATES"]
+
+    bound = []
+    used_hotkeys = set()
+
+    for template_key, template in templates.items():
+        if not isinstance(template, dict):
+            continue
+
+        hotkey = str(template.get("hotkey") or "").strip().lower()
+        if not hotkey:
+            continue
+
+        if hotkey in used_hotkeys:
+            print(f"模板 {template_key} 的快捷键 {hotkey} 重复，已跳过。")
+            continue
+
+        used_hotkeys.add(hotkey)
+        keyboard.add_hotkey(hotkey, lambda key=template_key: copy_all_and_put_into_each_remark(key))
+        bound.append((hotkey, template.get("name", template_key), template_key))
+
+    if not bound:
+        keyboard.add_hotkey("ctrl+1", lambda: copy_all_and_put_into_each_remark("default"))
+        bound.append(("ctrl+1", "通用模板", "default"))
+
+    return bound
+
+
 def main():
     mode = co_initialize()
 
-    keyboard.add_hotkey("ctrl+1", copy_all_and_put_into_each_remark)
+    bound_templates = bind_order_template_hotkeys()
 
     print("千牛订单备注助手已启动")
-    print("Ctrl+1：只识别【待发货】订单，读取选中的角色名和电话，生成文案并自动粘贴聊天输入框")
+    for hotkey, name, key in bound_templates:
+        print(f"{hotkey}：使用【{name}】模板生成文案并自动粘贴聊天输入框（配置键：{key}）")
     print("Ctrl+0：退出程序")
     print("")
     print("说明：")
     print("1. 旺旺名只取快捷复制内容里的【买家旺旺】")
     print("2. 只复制状态为【待发货】的订单")
-    print("3. 第一单永远处理，后续订单付款时间间隔 <= 5 分钟才参与合并")
-    print("4. 超过 5 分钟的订单跳过，不再执行任何备注操作")
+    print("3. 第一单永远处理，后续订单按模板配置的 time_window_minutes 参与合并")
+    print("4. 超过合单时间窗口的订单跳过，不再执行任何备注操作")
     print("5. 最终文案会自动粘贴到底部聊天输入框")
     print("6. 最终文案会保存为 qianniu_merged_orders.txt")
 
@@ -1840,7 +2006,7 @@ def main():
 
 def merged_main():
     print("========== 统一自动录单助手 ==========")
-    print("Ctrl+1：千牛订单助手")
+    print("千牛生成文案快捷键：读取 config.json 的 ORDER_TEMPLATES")
     print("Ctrl+2：浏览器自动录单")
     print("Ctrl+0：退出程序")
     print("====================================")
@@ -1851,11 +2017,13 @@ def merged_main():
     # 保持浏览器自动录单原热键逻辑：Ctrl+2
     bind_hotkeys(page)
 
-    # 保持千牛订单助手原业务函数：Ctrl+1
-    keyboard.add_hotkey("ctrl+1", copy_all_and_put_into_each_remark)
+    bound_templates = bind_order_template_hotkeys()
 
-    print("统一助手已就绪：Ctrl+1 千牛生成文案，Ctrl+2 自动录单，Ctrl+0 退出。")
-    print("浏览器自动录单逻辑、千牛订单助手逻辑均未改业务。")
+    print("统一助手已就绪：")
+    for hotkey, name, key in bound_templates:
+        print(f"{hotkey}：千牛生成【{name}】文案（配置键：{key}）")
+    print("Ctrl+2：把聊天框里的模板录入后台")
+    print("Ctrl+0：退出")
 
     keyboard.wait("ctrl+0")
     print("程序已退出。")
